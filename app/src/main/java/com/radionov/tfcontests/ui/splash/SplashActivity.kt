@@ -14,6 +14,7 @@ import com.radionov.tfcontests.TFContestsApp
 import com.radionov.tfcontests.ui.login.LoginActivity
 import com.radionov.tfcontests.ui.login.LoginPresenter
 import com.radionov.tfcontests.ui.login.LoginView
+import com.radionov.tfcontests.ui.main.MainActivity
 import javax.inject.Inject
 
 class SplashActivity : MvpAppCompatActivity(), SplashView {
@@ -38,8 +39,7 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
     }
 
     override fun openMainScreen() {
-        //openScreen(LoginActivity::class.java)
-        Toast.makeText(this, "MAIN", Toast.LENGTH_SHORT).show()
+        openScreen(MainActivity::class.java)
     }
 
     private fun openScreen(screen: Class<out Activity>) {

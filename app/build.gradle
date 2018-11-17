@@ -42,6 +42,8 @@ dependencies {
     implementation "com.android.support:design:$versions.ANDROID_SUPPORT"
     implementation "com.android.support.constraint:constraint-layout:$versions.CONSTRAINT_LAYOUT"
 
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+
     //Images Picasso
     implementation "com.squareup.picasso:picasso:$versions.PICASSO"
 

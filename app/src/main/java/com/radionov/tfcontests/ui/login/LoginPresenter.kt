@@ -19,6 +19,7 @@ class LoginPresenter @Inject constructor(private val authInteractor: AuthInterac
     fun login(email: String, pass: String) {
         if (authInteractor.checkLogin()) {
             viewState.onLoginSuccess()
+            return
         }
 
         disposable?.dispose()
@@ -27,13 +28,12 @@ class LoginPresenter @Inject constructor(private val authInteractor: AuthInterac
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ login ->
-                if (login?.details != null) {
+                if (login.email == null) {
                     viewState.onLoginFailed()
                 } else {
                     viewState.onLoginSuccess()
-
                 }
-            }, { e->
+            }, {
             viewState.onLoginFailed()
         })
     }

@@ -49,6 +49,8 @@ class NetworkModule {
                 builder.addHeader("Cookie", it)
             }
 
+            builder.addHeader("Referer", "https://fintech.tinkoff.ru/")
+
             chain.proceed(builder.build())
         }
     }
@@ -58,8 +60,8 @@ class NetworkModule {
             val setCookieHeader = "Set-Cookie"
             val originalResponse = chain.proceed(chain.request())
 
-            if (!originalResponse.headers(setCookieHeader).isEmpty()) {
-                val cookies = prefs.getCookies() as HashSet<String>
+            val cookies = prefs.getCookies() as HashSet<String>
+            if (cookies.isEmpty() && !originalResponse.headers(setCookieHeader).isEmpty()) {
 
                 originalResponse.headers(setCookieHeader).forEach {
                     cookies.add(it)
