@@ -7,7 +7,9 @@ import com.radionov.tfcontests.data.repositories.AuthRepository
  */
 class AuthInteractor(private val authRepository: AuthRepository) {
 
-    fun checkLogin(): Boolean = false
+    fun checkLogin() =
+        authRepository.getCookies()?.isNotEmpty() ?: false
 
-
+    fun login(email: String, pass: String) =
+        authRepository.login(email, pass)
 }

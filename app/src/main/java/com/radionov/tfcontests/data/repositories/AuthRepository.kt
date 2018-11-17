@@ -8,13 +8,15 @@ import com.radionov.tfcontests.data.datasource.remote.FintechApi
  */
 class AuthRepository(private val prefs: Prefs, private val fintechApi: FintechApi) {
 
+    fun login(email: String, pass: String) = fintechApi.login(email, pass)
+
     fun getCookies() = prefs.getCookies()
 
-    fun setCookies(cookies: String) {
+    fun setCookies(cookies: Set<String>) {
         prefs.setCookies(cookies)
     }
 
-    fun performLogin(email: String, pass: String) {
-        fintechApi.login(email, pass)
+    fun removeCookies() {
+        prefs.removeCookies()
     }
 }
