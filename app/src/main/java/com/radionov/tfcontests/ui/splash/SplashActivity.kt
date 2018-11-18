@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -16,12 +17,16 @@ import com.radionov.tfcontests.ui.login.LoginPresenter
 import com.radionov.tfcontests.ui.login.LoginView
 import com.radionov.tfcontests.ui.main.MainActivity
 import javax.inject.Inject
+import android.support.v4.content.ContextCompat.startActivity
+import android.support.v4.os.HandlerCompat.postDelayed
+
 
 class SplashActivity : MvpAppCompatActivity(), SplashView {
 
     @Inject
     @InjectPresenter
     lateinit var splashPresenter: SplashPresenter
+    private var timeoutHandler: Handler? = null
 
     @ProvidePresenter
     fun providePresenter() = splashPresenter
@@ -43,7 +48,16 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
     }
 
     private fun openScreen(screen: Class<out Activity>) {
-        val intent = Intent(this, screen)
-        startActivity(intent)
+        if (timeoutHandler == null) {
+            timeoutHandler = Handler()
+            timeoutHandler?.postDelayed({
+                val intent = Intent(this, screen)
+                startActivity(intent)
+            }, SPLASH_TIME_OUT)
+        }
+    }
+
+    companion object {
+        const val SPLASH_TIME_OUT = 2000L
     }
 }

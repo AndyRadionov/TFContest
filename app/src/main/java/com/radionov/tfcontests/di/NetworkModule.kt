@@ -47,6 +47,9 @@ class NetworkModule {
 
             cookies?.forEach {
                 builder.addHeader("Cookie", it)
+                if (it.startsWith("crsf")) {
+                    builder.addHeader("X-CSRFToken", it)
+                }
             }
 
             builder.addHeader("Referer", "https://fintech.tinkoff.ru/")
