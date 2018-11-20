@@ -10,7 +10,7 @@ import com.radionov.tfcontests.di.PersistenceModule
 /**
  * @author Andrey Radionov
  */
-class TFContestsApp : Application() {
+class ContestApp : Application() {
 
     companion object {
         lateinit var appComponent: AppComponent
