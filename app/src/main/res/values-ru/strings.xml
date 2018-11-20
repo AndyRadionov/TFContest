@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="login">Войти</string>
+    <string name="restore_pass">Восстановить пароль</string>
+    <string name="error_login">Не верный логин / пароль</string>
+    <string name="error_restore">Email не найден</string>
+    <string name="restore_sent">Инструкции отпралены на\\n$s</string>
+</resources>

@@ -18,13 +18,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.TextInputLayout
+    <FrameLayout
         android:id="@+id/name_input_layout"
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/login_input_bg"
-        app:hintEnabled="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_horse_logo">
@@ -34,7 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:focusableInTouchMode="true"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:hint="ЛОГИН"
@@ -45,15 +43,14 @@
             android:textColorHint="#ffffff"
             android:textSize="14sp"
             android:textStyle="normal" />
-    </android.support.design.widget.TextInputLayout>
+    </FrameLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <FrameLayout
         android:id="@+id/pass_input_layout"
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/login_input_bg"
-        app:hintEnabled="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_input_layout">
@@ -73,7 +70,7 @@
             android:textColorHint="#fff"
             android:textSize="14sp"
             android:textStyle="normal" />
-    </android.support.design.widget.TextInputLayout>
+    </FrameLayout>
 
     <Button
         android:id="@+id/btn_login"
@@ -86,6 +83,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pass_input_layout" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:elevation="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:indeterminate="true"
+        app:layout_constraintLeft_toLeftOf="@id/btn_login"
+        app:layout_constraintRight_toRightOf="@id/btn_login"
+        app:layout_constraintTop_toTopOf="@id/btn_login"
+        app:layout_constraintBottom_toBottomOf="@id/btn_login" />
 
     <Button
         android:id="@+id/btn_restore_pass"
@@ -103,4 +112,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
 </android.support.constraint.ConstraintLayout>

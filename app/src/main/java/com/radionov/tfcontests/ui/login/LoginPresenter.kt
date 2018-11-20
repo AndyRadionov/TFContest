@@ -2,6 +2,7 @@ package com.radionov.tfcontests.ui.login
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.radionov.tfcontests.R
 import com.radionov.tfcontests.interactors.AuthInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -12,8 +13,7 @@ import javax.inject.Inject
  * @author Andrey Radionov
  */
 @InjectViewState
-class LoginPresenter @Inject constructor(private val authInteractor: AuthInteractor)
-    : MvpPresenter<LoginView>() {
+class LoginPresenter @Inject constructor(private val authInteractor: AuthInteractor) : MvpPresenter<LoginView>() {
 
     var disposable: Disposable? = null
 
@@ -28,15 +28,15 @@ class LoginPresenter @Inject constructor(private val authInteractor: AuthInterac
         disposable = authInteractor.login(email, pass)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({ login ->
+            .subscribe({ login ->
                 if (login.email == null) {
-                    viewState.onLoginFail()
+                    viewState.onError(R.string.error_login)
                 } else {
                     viewState.onLogin()
                 }
             }, {
-            viewState.onLoginFail()
-        })
+                viewState.onError(R.string.error_login)
+            })
     }
 
     fun restorePass(email: String) {
@@ -48,7 +48,7 @@ class LoginPresenter @Inject constructor(private val authInteractor: AuthInterac
             .subscribe({
                 viewState.onRestorePass()
             }, {
-                viewState.onRestorePassFail()
+                viewState.onError(R.string.error_restore)
             })
     }
 }

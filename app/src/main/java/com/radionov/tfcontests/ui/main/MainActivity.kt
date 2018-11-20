@@ -11,6 +11,7 @@ import com.radionov.tfcontests.R
 import com.radionov.tfcontests.TFContestsApp
 import com.radionov.tfcontests.ui.login.LoginActivity
 import com.radionov.tfcontests.ui.login.LoginPresenter
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -36,6 +37,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun onLogoutFail() {
-        Toast.makeText(this, "Logout Fail", Toast.LENGTH_SHORT).show()
+        Toasty.error(this, "Logout Fail", Toast.LENGTH_SHORT).show()
     }
 }

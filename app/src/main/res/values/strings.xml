@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">TFContests</string>
+    <string name="app_name" translatable="false">TFContest</string>
 
-    <string name="login">Войти</string>
-    <string name="restore_pass">Восстановить пароль</string>
+    <string name="login">Login</string>
+    <string name="restore_pass">Restore password</string>
+    <string name="error_login">Wrong email / password</string>
+    <string name="error_restore">Email not found</string>
+    <string name="restore_sent">Instruction sent totest@mail.ru</string>
 </resources>

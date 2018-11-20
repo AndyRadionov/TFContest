@@ -44,6 +44,9 @@ dependencies {
 
     implementation 'com.facebook.stetho:stetho:1.5.0'
 
+    //Toasts
+    implementation 'com.github.GrenderG:Toasty:1.3.0'
+
     //Images Picasso
     implementation "com.squareup.picasso:picasso:$versions.PICASSO"
 
