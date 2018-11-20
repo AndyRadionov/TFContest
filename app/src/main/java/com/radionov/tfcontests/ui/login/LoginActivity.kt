@@ -39,7 +39,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun onRestorePass() {
         setProgressView(View.INVISIBLE, View.VISIBLE, true)
-        Toasty.success(this, getString(R.string.restore_sent), Toast.LENGTH_SHORT).show()
+        Toasty.success(this, getString(R.string.restore_sent, email_input.text), Toast.LENGTH_SHORT).show()
     }
 
     override fun onError(messageId: Int) {
@@ -49,7 +49,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     private fun initViews() {
         btn_login.setOnClickListener {
-            val email = name_input.text.toString()
+            val email = email_input.text.toString()
             setProgressView(View.VISIBLE, View.INVISIBLE, false)
             if (isLoginState()) {
                 loginPresenter
@@ -80,7 +80,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     private fun setProgressView(progressVisibility: Int, buttonVisibility: Int, buttonsEnabled: Boolean) {
         pb_loading.visibility = progressVisibility
         btn_login.visibility = buttonVisibility
-        name_input.isEnabled = buttonsEnabled
+        email_input.isEnabled = buttonsEnabled
         pass_input.isEnabled = buttonsEnabled
         btn_restore_pass.isEnabled = buttonsEnabled
     }

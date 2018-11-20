@@ -5,5 +5,5 @@
     <string name="restore_pass">Restore password</string>
     <string name="error_login">Wrong email / password</string>
     <string name="error_restore">Email not found</string>
-    <string name="restore_sent">Instruction sent totest@mail.ru</string>
+    <string name="restore_sent">Instruction sent to\n%s</string>
 </resources>
