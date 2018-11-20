@@ -2,6 +2,7 @@ package com.radionov.tfcontests.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -26,16 +27,52 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        btn_login.setOnClickListener { loginPresenter
-            .login(name_input.text.toString(), pass_input.text.toString()) }
+        initViews()
     }
 
-    override fun onLoginFailed() {
-        Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onLoginSuccess() {
+    override fun onLogin() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
+    override fun onLoginFail() {
+        Toast.makeText(this, "Login Fail", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestorePass() {
+        Toast.makeText(this, "Restore Pass Success", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestorePassFail() {
+        Toast.makeText(this, "Restore Pass Fail", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun initViews() {
+        btn_login.setOnClickListener {
+            val email = name_input.text.toString()
+            if (isLoginState()) {
+                loginPresenter
+                    .login(email, pass_input.text.toString())
+            } else {
+                loginPresenter.restorePass(email)
+            }
+        }
+
+        btn_restore_pass.setOnClickListener {
+            setRestorePassState()
+        }
+    }
+
+    private fun setRestorePassState() {
+        btn_restore_pass.text = btn_login.text
+        val (passVisibility, btnText) = if (isLoginState()) {
+            View.GONE to getString(R.string.restore_pass)
+        } else {
+            View.VISIBLE to getString(R.string.login)
+        }
+        pass_input_layout.visibility = passVisibility
+        btn_login.text = btnText
+    }
+
+    private fun isLoginState() = pass_input_layout.visibility == View.VISIBLE
 }

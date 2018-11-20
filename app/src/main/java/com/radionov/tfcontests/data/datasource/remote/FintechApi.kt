@@ -16,6 +16,10 @@ interface FintechApi {
     @POST("signin")
     fun login(@Field("email") email: String, @Field("password") pass: String): Single<User>
 
+    @FormUrlEncoded
+    @POST("lost_password")
+    fun restorePass(@Field("email") email: String): Completable
+
     @POST("signout")
     fun logout(): Completable
 }

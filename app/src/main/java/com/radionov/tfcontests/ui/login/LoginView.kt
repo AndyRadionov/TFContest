@@ -10,6 +10,8 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface LoginView: MvpView {
 
-    fun onLoginFailed()
-    fun onLoginSuccess()
+    fun onLogin()
+    fun onLoginFail()
+    fun onRestorePass()
+    fun onRestorePassFail()
 }

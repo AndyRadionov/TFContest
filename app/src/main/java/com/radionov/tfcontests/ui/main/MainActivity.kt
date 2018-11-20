@@ -3,6 +3,7 @@ package com.radionov.tfcontests.ui.main
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -18,7 +19,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @Inject
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
-
     @ProvidePresenter
     fun providePresenter() = mainPresenter
 
@@ -33,5 +33,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onLogout() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onLogoutFail() {
+        Toast.makeText(this, "Logout Fail", Toast.LENGTH_SHORT).show()
     }
 }

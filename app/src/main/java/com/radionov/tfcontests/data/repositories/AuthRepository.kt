@@ -11,6 +11,8 @@ class AuthRepository(private val prefs: Prefs, private val fintechApi: FintechAp
 
     fun login(email: String, pass: String) = fintechApi.login(email, pass)
 
+    fun restorePass(email: String) = fintechApi.restorePass(email)
+
     fun logout() = fintechApi.logout()
 
     fun getCookies() = prefs.getCookies()

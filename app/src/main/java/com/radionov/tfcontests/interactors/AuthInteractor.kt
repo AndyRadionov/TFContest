@@ -22,4 +22,6 @@ class AuthInteractor(private val authRepository: AuthRepository) {
         .doOnComplete {
             authRepository.clearAuthData()
         }
+
+    fun restorePass(email: String) = authRepository.restorePass(email)
 }
