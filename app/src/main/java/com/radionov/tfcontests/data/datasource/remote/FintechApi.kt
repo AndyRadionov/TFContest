@@ -5,6 +5,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 /**
@@ -22,4 +23,7 @@ interface FintechApi {
 
     @POST("signout")
     fun logout(): Completable
+
+    @GET("course/android_fall2018/homeworks")
+    fun getHomeWorks()
 }

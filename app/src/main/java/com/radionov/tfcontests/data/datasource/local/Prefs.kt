@@ -3,6 +3,7 @@ package com.radionov.tfcontests.data.datasource.local
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.radionov.tfcontests.data.entities.User
+import es.dmoral.toasty.Toasty
 import kotlin.collections.HashSet
 
 /**
@@ -26,7 +27,7 @@ class Prefs(private val prefs: SharedPreferences) {
             .apply()
     }
 
-    fun getUser() =
+    fun getUser(): User =
         gson.fromJson(prefs.getString(USER_KEY, DEFAULT_LOGIN), User::class.java)
 
     fun setUser(user: User) {
