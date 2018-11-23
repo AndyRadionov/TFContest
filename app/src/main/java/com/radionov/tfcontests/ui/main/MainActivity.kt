@@ -8,6 +8,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.ContestApp
+import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.ui.login.LoginActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,6 +19,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @Inject
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
+
     @ProvidePresenter
     fun providePresenter() = mainPresenter
 
@@ -27,6 +29,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
 
         btn_logout.setOnClickListener { mainPresenter.logout() }
+
+        btn_homeworks.setOnClickListener { mainPresenter.getHomeWorks() }
     }
 
     override fun onLogout() {
@@ -36,5 +40,13 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onLogoutFail() {
         Toasty.error(this, "Logout Fail", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showTasks(tasks: List<Task>) {
+        homeworks.text = tasks.joinToString(transform = { t -> t.shortName })
+    }
+
+    override fun showError() {
+        Toasty.error(this@MainActivity, "Error", Toast.LENGTH_SHORT).show()
     }
 }

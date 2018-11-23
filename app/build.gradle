@@ -29,7 +29,8 @@ ext.versions = [ANDROID_SUPPORT  : "28.0.0",
                 GSON             : "2.8.5",
                 RETROFIT         : "2.4.0",
                 DAGGER           : "2.16",
-                MOXY             : "1.5.5"]
+                MOXY             : "1.5.5",
+                TOASTY           : "1.3.0"]
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -43,9 +44,12 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$versions.CONSTRAINT_LAYOUT"
 
     implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     //Toasts
-    implementation 'com.github.GrenderG:Toasty:1.3.0'
+    implementation "com.github.GrenderG:Toasty:$versions.TOASTY"
 
     //Images Picasso
     implementation "com.squareup.picasso:picasso:$versions.PICASSO"

@@ -3,7 +3,9 @@ package com.radionov.tfcontests.di
 import com.radionov.tfcontests.data.datasource.local.Prefs
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
 import com.radionov.tfcontests.data.repositories.AuthRepository
+import com.radionov.tfcontests.data.repositories.ContestRepository
 import com.radionov.tfcontests.interactors.AuthInteractor
+import com.radionov.tfcontests.interactors.ContestInteractor
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -25,4 +27,14 @@ class AppModule {
     fun provideAuthRepository(prefs: Prefs,
                               fintechApi: FintechApi): AuthRepository =
         AuthRepository(prefs, fintechApi)
+
+    @Provides
+    @Singleton
+    fun provideContestInteractor(contestRepository: ContestRepository): ContestInteractor =
+        ContestInteractor(contestRepository)
+
+    @Provides
+    @Singleton
+    fun provideContestRepository(fintechApi: FintechApi): ContestRepository =
+        ContestRepository(fintechApi)
 }

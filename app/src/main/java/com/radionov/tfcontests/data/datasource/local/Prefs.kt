@@ -27,7 +27,7 @@ class Prefs(private val prefs: SharedPreferences) {
             .apply()
     }
 
-    fun getUser(): User =
+    fun getUser(): User? =
         gson.fromJson(prefs.getString(USER_KEY, DEFAULT_LOGIN), User::class.java)
 
     fun setUser(user: User) {

@@ -1,6 +1,7 @@
 package com.radionov.tfcontests.di
 
 import android.content.Context
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.radionov.tfcontests.data.datasource.local.Prefs
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
 import dagger.Module
@@ -8,10 +9,12 @@ import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
+import java.util.*
 import javax.inject.Singleton
 
 /**
@@ -35,8 +38,12 @@ class NetworkModule {
             .create(FintechApi::class.java)
 
     private fun initOkHttpClient(prefs: Prefs): OkHttpClient {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder()
             .setCookieStore(prefs)
+            .addInterceptor(StethoInterceptor())
+            .addInterceptor(httpLoggingInterceptor)
             .build()
     }
 
@@ -45,12 +52,16 @@ class NetworkModule {
             val builder = chain.request().newBuilder()
             val cookies = prefs.getCookies()
 
-            cookies?.forEach {
+            cookies?.firstOrNull { it.startsWith("anygen") }?.let {
                 builder.addHeader("Cookie", it)
-                if (it.startsWith("crsf")) {
-                    builder.addHeader("X-CSRFToken", it)
-                }
             }
+//            builder.addHeader("Cookie",
+//            cookies?.first { it.startsWith("anygen") }
+//            .forEach {
+//                if (it.startsWith("anygen")) {
+//                    builder.addHeader("Cookie", it)
+//                }
+//            }
 
             builder.addHeader("Referer", "https://fintech.tinkoff.ru/")
 
