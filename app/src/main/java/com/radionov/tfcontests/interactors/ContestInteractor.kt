@@ -11,9 +11,9 @@ class ContestInteractor(private val contestRepository: ContestRepository) {
 
     fun getHomeWorks() =
         contestRepository.getHomeWorks()
-            .map { hwr:HomeWorksResponse -> hwr.homeworks }
-            .flatMap { hws -> Observable.fromIterable(hws) }
-            .flatMap { hw -> Observable.fromIterable(hw.tasks) }
-            .filter { t -> t.task.taskType == "test_during_lecture" }
+            .map { response:HomeWorksResponse -> response.homeworks }
+            .flatMap { homeWorks -> Observable.fromIterable(homeWorks) }
+            .flatMap { homeWork -> Observable.fromIterable(homeWork.tasks) }
+            .filter { task -> task.task.taskType == "test_during_lecture" }
             .toList()
 }

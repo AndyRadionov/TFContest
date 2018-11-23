@@ -43,7 +43,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showTasks(tasks: List<Task>) {
-        homeworks.text = tasks.joinToString(transform = { t -> t.shortName })
+        homeworks.text = tasks.joinToString(transform = { t -> t.task.title })
     }
 
     override fun showError() {

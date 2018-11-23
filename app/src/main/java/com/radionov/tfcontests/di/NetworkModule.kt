@@ -55,13 +55,6 @@ class NetworkModule {
             cookies?.firstOrNull { it.startsWith("anygen") }?.let {
                 builder.addHeader("Cookie", it)
             }
-//            builder.addHeader("Cookie",
-//            cookies?.first { it.startsWith("anygen") }
-//            .forEach {
-//                if (it.startsWith("anygen")) {
-//                    builder.addHeader("Cookie", it)
-//                }
-//            }
 
             builder.addHeader("Referer", "https://fintech.tinkoff.ru/")
 
