@@ -20,20 +20,6 @@ class MainPresenter @Inject constructor(
 
     private var disposable: Disposable? = null
 
-    fun logout() {
-
-        disposable?.dispose()
-
-        disposable = authInteractor.logout()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                viewState.onLogout()
-            }, {
-                viewState.onLogoutFail()
-            })
-    }
-
     fun getHomeWorks() {
         disposable?.dispose()
 

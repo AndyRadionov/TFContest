@@ -2,6 +2,9 @@ package com.radionov.tfcontests.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -10,6 +13,7 @@ import com.radionov.tfcontests.R
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.ui.login.LoginActivity
+import com.radionov.tfcontests.ui.settings.SettingsActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -28,18 +32,22 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_logout.setOnClickListener { mainPresenter.logout() }
-
         btn_homeworks.setOnClickListener { mainPresenter.getHomeWorks() }
     }
 
-    override fun onLogout() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
-    override fun onLogoutFail() {
-        Toasty.error(this, "Logout Fail", Toast.LENGTH_SHORT).show()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_settings) {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showTasks(tasks: List<Task>) {

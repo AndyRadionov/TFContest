@@ -11,9 +11,11 @@ import kotlin.collections.HashSet
  */
 class Prefs(private val prefs: SharedPreferences) {
 
-    private val gson = Gson()
-
     fun getCookies(): Set<String>? = prefs.getStringSet(COOKIES_KEY, defaultCookies)
+
+    fun getAuthCookie() = getCookies()?.firstOrNull { it.startsWith(AUTH_COOKIE) }
+
+    fun getCsrfCookie() = getCookies()?.firstOrNull { it.startsWith(CSRF_COOKIE) }
 
     fun setCookies(cookies: Set<String>) {
         prefs.edit()
@@ -27,25 +29,10 @@ class Prefs(private val prefs: SharedPreferences) {
             .apply()
     }
 
-    fun getUser(): User? =
-        gson.fromJson(prefs.getString(USER_KEY, DEFAULT_LOGIN), User::class.java)
-
-    fun setUser(user: User) {
-        prefs.edit()
-            .putString(USER_KEY, gson.toJson(user))
-            .apply()
-    }
-
-    fun removeLogin() {
-        prefs.edit()
-            .remove(USER_KEY)
-            .apply()
-    }
-
     companion object {
         private const val COOKIES_KEY = "cookies_key"
-        private const val USER_KEY = "user_key"
-        private const val DEFAULT_LOGIN = ""
+        private const val AUTH_COOKIE = "anygen"
+        private const val CSRF_COOKIE = "csrf"
         private val defaultCookies = HashSet<String>()
     }
 }

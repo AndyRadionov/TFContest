@@ -6,4 +6,8 @@
     <string name="error_login">Не верный логин / пароль</string>
     <string name="error_restore">Email не найден</string>
     <string name="restore_sent">Инструкции отпралены на\n%s</string>
+    <string name="profile">Профиль</string>
+    <string name="action_settings">Настройки</string>
+    <string name="logout">Выйти</string>
+    <string name="change_user">Сменить пользователя</string>
 </resources>

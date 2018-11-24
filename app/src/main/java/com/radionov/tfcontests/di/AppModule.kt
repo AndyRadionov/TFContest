@@ -1,6 +1,7 @@
 package com.radionov.tfcontests.di
 
 import com.radionov.tfcontests.data.datasource.local.Prefs
+import com.radionov.tfcontests.data.datasource.local.db.UserDao
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
 import com.radionov.tfcontests.data.repositories.AuthRepository
 import com.radionov.tfcontests.data.repositories.ContestRepository
@@ -25,8 +26,9 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAuthRepository(prefs: Prefs,
+                              userDao: UserDao,
                               fintechApi: FintechApi): AuthRepository =
-        AuthRepository(prefs, fintechApi)
+        AuthRepository(prefs, userDao, fintechApi)
 
     @Provides
     @Singleton
