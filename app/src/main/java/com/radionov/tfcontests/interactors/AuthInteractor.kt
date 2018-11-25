@@ -1,11 +1,13 @@
 package com.radionov.tfcontests.interactors
 
 import com.radionov.tfcontests.data.repositories.AuthRepository
+import com.radionov.tfcontests.data.repositories.UserRepository
 
 /**
  * @author Andrey Radionov
  */
-class AuthInteractor(private val authRepository: AuthRepository) {
+class AuthInteractor(private val authRepository: AuthRepository,
+                     private val userRepository: UserRepository) {
 
     fun checkLogin() =
         authRepository.getAuthCookie() != null
@@ -14,13 +16,14 @@ class AuthInteractor(private val authRepository: AuthRepository) {
         authRepository.login(email, pass)
             .doOnSuccess { user ->
                 if (user.email != null) {
-                    authRepository.saveUser(user)
+                    userRepository.saveLocalUser(user)
                 }
             }
 
     fun logout() = authRepository.logout()
         .doOnComplete {
-            authRepository.clearAuthData()
+            authRepository.removeCookies()
+            userRepository.removeLocalUser()
         }
 
     fun restorePass(email: String) = authRepository.restorePass(email)

@@ -9,9 +9,10 @@ import io.reactivex.Completable
 /**
  * @author Andrey Radionov
  */
-class AuthRepository(private val prefs: Prefs,
-                     private val userDao: UserDao,
-                     private val fintechApi: FintechApi) {
+class AuthRepository(
+    private val prefs: Prefs,
+    private val fintechApi: FintechApi
+) {
 
     fun login(email: String, pass: String) = fintechApi.login(email, pass)
 
@@ -24,14 +25,7 @@ class AuthRepository(private val prefs: Prefs,
 
     fun getAuthCookie() = prefs.getAuthCookie()
 
-    fun getUser() = userDao.getUser()
-
-    fun saveUser(user: User) {
-        userDao.saveProfile(user)
-    }
-
-    fun clearAuthData() {
+    fun removeCookies() {
         prefs.removeCookies()
-        userDao.removeProfile()
     }
 }

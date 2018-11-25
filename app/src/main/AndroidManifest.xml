@@ -31,7 +31,8 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.settings.SettingsActivity"></activity>
+        <activity android:name=".ui.settings.SettingsActivity" />
+        <activity android:name=".ui.profile.ProfileActivity"></activity>
     </application>
 
 </manifest>

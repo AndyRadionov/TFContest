@@ -33,4 +33,10 @@ interface FintechApi {
 
     @GET("contest/lecture_test_{id}/problems")
     fun getProblemList(@Path("id") id: Int): Single<List<Problem>>
+
+    @GET("user")
+    fun getUser(): Single<UserWithStatus>
+
+    @POST("register_user")
+    fun updateUser(user: UserWithStatus): Completable
 }

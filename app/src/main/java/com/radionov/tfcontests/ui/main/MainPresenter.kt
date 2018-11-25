@@ -14,9 +14,8 @@ import javax.inject.Inject
  */
 @InjectViewState
 class MainPresenter @Inject constructor(
-    private val authInteractor: AuthInteractor,
-    private val contestInteractor: ContestInteractor)
-    : MvpPresenter<MainView>() {
+    private val contestInteractor: ContestInteractor
+) : MvpPresenter<MainView>() {
 
     private var disposable: Disposable? = null
 

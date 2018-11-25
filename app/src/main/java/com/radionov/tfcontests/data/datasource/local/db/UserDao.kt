@@ -17,8 +17,8 @@ interface UserDao {
     fun getUser() : Single<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveProfile(user: User)
+    fun saveUser(user: User)
 
     @Query("DELETE FROM user")
-    fun removeProfile()
+    fun removeUser()
 }
