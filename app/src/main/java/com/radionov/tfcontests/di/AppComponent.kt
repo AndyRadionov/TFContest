@@ -3,6 +3,7 @@ package com.radionov.tfcontests.di
 import android.app.Application
 import com.radionov.tfcontests.ui.login.LoginActivity
 import com.radionov.tfcontests.ui.main.MainActivity
+import com.radionov.tfcontests.ui.profile.ProfileActivity
 import com.radionov.tfcontests.ui.settings.SettingsActivity
 import com.radionov.tfcontests.ui.splash.SplashActivity
 import dagger.BindsInstance
@@ -27,5 +28,6 @@ interface AppComponent {
     fun inject(splashActivity: SplashActivity)
     fun inject(loginActivity: LoginActivity)
     fun inject(mainActivity: MainActivity)
+    fun inject(profileActivity: ProfileActivity)
     fun inject(settingsActivity: SettingsActivity)
 }

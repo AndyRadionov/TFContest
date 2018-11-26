@@ -13,6 +13,7 @@ import com.radionov.tfcontests.R
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.ui.login.LoginActivity
+import com.radionov.tfcontests.ui.profile.ProfileActivity
 import com.radionov.tfcontests.ui.settings.SettingsActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,10 +43,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_settings) {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-            return true
+        when (item.itemId) {
+            R.id.action_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.action_profile -> {
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }

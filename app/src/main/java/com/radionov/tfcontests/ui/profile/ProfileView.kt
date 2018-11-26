@@ -9,5 +9,6 @@ import com.radionov.tfcontests.data.entities.User
 interface ProfileView: MvpView {
 
     fun showProfile(user: User)
+    fun showSuccess()
     fun showError()
 }

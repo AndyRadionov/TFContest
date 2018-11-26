@@ -5,6 +5,7 @@ import com.radionov.tfcontests.data.datasource.remote.FintechApi
 import com.radionov.tfcontests.data.entities.User
 import com.radionov.tfcontests.data.entities.UserWithStatus
 import io.reactivex.Completable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * @author Andrey Radionov
@@ -23,12 +24,14 @@ class UserRepository(
     fun saveLocalUser(user: User) {
         Completable.fromAction {
             userDao.saveUser(user)
-        }
+        }.subscribeOn(Schedulers.io())
+            .subscribe()
     }
 
     fun removeLocalUser() {
         Completable.fromAction {
             userDao.removeUser()
-        }
+        }.subscribeOn(Schedulers.io())
+            .subscribe()
     }
 }

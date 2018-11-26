@@ -17,12 +17,12 @@ data class User(
     val university: String?,
     @SerializedName("university_graduation") val universityGraduation: Int?,
     @SerializedName("current_work") val currentWork: String?,
-    @SerializedName("first_name") val firstName: String?,
-    @SerializedName("last_name") val lastName: String?,
-    @SerializedName("middle_name") val middleName: String?
+    @SerializedName("first_name") val firstName: String,
+    @SerializedName("last_name") val lastName: String,
+    @SerializedName("middle_name") val middleName: String
 )
 
 data class UserWithStatus(
     val user: User,
-    val status: String
+    val status: String = "Ok"
 )

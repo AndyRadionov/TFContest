@@ -2,6 +2,7 @@ package com.radionov.tfcontests.di
 
 import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.radionov.tfcontests.BuildConfig
 import com.radionov.tfcontests.data.datasource.local.Prefs
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
 import dagger.Module
@@ -22,15 +23,12 @@ import javax.inject.Singleton
  */
 @Module
 class NetworkModule {
-    companion object {
-        private const val BASE_URL = "https://fintech.tinkoff.ru/api/"
-    }
 
     @Provides
     @Singleton
     fun provideFintechApi(prefs: Prefs): FintechApi =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.TF_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(initOkHttpClient(prefs))
@@ -50,13 +48,10 @@ class NetworkModule {
     private fun initSendCookiesInterceptor(prefs: Prefs): Interceptor {
         return Interceptor { chain ->
             val builder = chain.request().newBuilder()
-            val cookies = prefs.getCookies()
 
-            cookies?.firstOrNull { it.startsWith("anygen") }?.let {
-                builder.addHeader("Cookie", it)
-            }
+            prefs.getAuthCookie()?.let { builder.addHeader("Cookie", it) }
 
-            builder.addHeader("Referer", "https://fintech.tinkoff.ru/")
+            builder.addHeader("Referer", BuildConfig.TF_URL)
 
             chain.proceed(builder.build())
         }
