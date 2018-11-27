@@ -7,5 +7,5 @@ import com.radionov.tfcontests.data.entities.User
  */
 
 fun User.getName(): String {
-    return "$firstName $lastName $middleName"
+    return "$lastName $firstName $middleName"
 }

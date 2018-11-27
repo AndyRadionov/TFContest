@@ -10,4 +10,15 @@
     <string name="action_settings">Настройки</string>
     <string name="logout">Выйти</string>
     <string name="change_user">Сменить пользователя</string>
+    <string name="settings">Настройки</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отменить</string>
+    <string name="grade_year">Год окончания ВУЗа</string>
+    <string name="university">ВУЗ</string>
+    <string name="education">Образование</string>
+    <string name="region">Город проживания</string>
+    <string name="email">Элетронная почта</string>
+    <string name="contacs">Контактная информация</string>
+    <string name="birthday">Дата рождения</string>
+    <string name="name">ФИО</string>
 </resources>

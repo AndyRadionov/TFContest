@@ -1,11 +1,11 @@
 package com.radionov.tfcontests.ui.profile
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.makeramen.roundedimageview.RoundedTransformationBuilder
 import com.radionov.tfcontests.BuildConfig
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
@@ -23,34 +23,38 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
 
     @ProvidePresenter
     fun providePresenter() = profilePresenter
-    private val transformation = RoundedTransformationBuilder()
-        .cornerRadiusDp(30f)
-        .oval(false)
-        .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ContestApp.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         profilePresenter.getProfile()
         swipe_container.setOnRefreshListener { profilePresenter.fetchUpdate() }
-        swipe_container.isRefreshing = true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showProfile(user: User) {
         swipe_container.isRefreshing = false
         et_name.setText(user.getName())
-        et_birth_date.setText(user.birthday)
+        et_birthday.setText(user.birthday)
         et_email.setText(user.email)
         et_region.setText(user.region)
         et_university.setText(user.university)
-        et_university_graduation.setText(user.universityGraduation.toString())
+        et_university_grade.setText(user.universityGraduation.toString())
         Picasso.get()
             .load("${BuildConfig.TF_URL}${user.avatar}")
             .placeholder(R.drawable.placeholder_user)
             .centerCrop()
             .fit()
-            .transform(transformation)
             .into(iv_avatar)
     }
 
