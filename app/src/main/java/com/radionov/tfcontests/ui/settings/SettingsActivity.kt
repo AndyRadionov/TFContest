@@ -3,6 +3,7 @@ package com.radionov.tfcontests.ui.settings
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -28,7 +29,17 @@ class SettingsActivity : MvpAppCompatActivity(), SettingsView {
         ContestApp.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         btn_logout.setOnClickListener { settingsPresenter.logout() }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onLogoutFail() {

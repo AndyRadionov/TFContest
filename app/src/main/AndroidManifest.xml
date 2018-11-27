@@ -32,6 +32,7 @@
             android:theme="@style/AppThemeNoActionBar" />
 
         <activity
+            android:label="@string/my_course"
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
 
