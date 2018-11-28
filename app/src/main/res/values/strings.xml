@@ -22,4 +22,5 @@
     <string name="birthday">Дата рождения</string>
     <string name="name">ФИО</string>
     <string name="my_course">Мой курс</string>
+    <string name="name_error">Введите имя и фамилию</string>
 </resources>

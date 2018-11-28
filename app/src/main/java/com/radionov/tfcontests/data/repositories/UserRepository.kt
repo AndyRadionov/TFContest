@@ -1,5 +1,6 @@
 package com.radionov.tfcontests.data.repositories
 
+import com.radionov.tfcontests.data.datasource.local.Prefs
 import com.radionov.tfcontests.data.datasource.local.db.UserDao
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
 import com.radionov.tfcontests.data.entities.User
@@ -12,12 +13,14 @@ import io.reactivex.schedulers.Schedulers
  */
 class UserRepository(
     private val userDao: UserDao,
+    private val prefs: Prefs,
     private val fintechApi: FintechApi
 ) {
 
     fun getRemoteUser() = fintechApi.getUser()
 
-    fun updateRemoteUser(user: UserWithStatus) = fintechApi.updateUser(user)
+    fun updateRemoteUser(user: UserWithStatus) =
+        fintechApi.updateUser(prefs.getCsrfCookie(), user.user)
 
     fun getLocalUser() = userDao.getUser()
 

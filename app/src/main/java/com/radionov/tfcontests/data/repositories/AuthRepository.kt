@@ -18,14 +18,9 @@ class AuthRepository(
 
     fun restorePass(email: String) = fintechApi.restorePass(email)
 
-    fun logout(): Completable {
-        val csrfCookie = prefs.getCsrfCookie()
-        return fintechApi.logout(csrfCookie)
-    }
+    fun logout() = fintechApi.logout(prefs.getCsrfCookie())
 
     fun getAuthCookie() = prefs.getAuthCookie()
 
-    fun removeCookies() {
-        prefs.removeCookies()
-    }
+    fun removeCookies() = prefs.removeCookies()
 }

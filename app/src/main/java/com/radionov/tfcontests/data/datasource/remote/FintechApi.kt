@@ -38,5 +38,5 @@ interface FintechApi {
     fun getUser(): Single<UserWithStatus>
 
     @POST("register_user")
-    fun updateUser(user: UserWithStatus): Completable
+    fun updateUser(@Header("Cookie") cookie: String?, @Body user: User): Completable
 }

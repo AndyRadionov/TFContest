@@ -44,5 +44,4 @@
             android:name=".ui.profile.ProfileActivity"
             android:label="@string/profile" />
     </application>
-
 </manifest>

@@ -46,6 +46,6 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(userDao: UserDao, fintechApi: FintechApi): UserRepository =
-        UserRepository(userDao, fintechApi)
+    fun provideUserRepository(userDao: UserDao, prefs: Prefs, fintechApi: FintechApi): UserRepository =
+        UserRepository(userDao, prefs, fintechApi)
 }
