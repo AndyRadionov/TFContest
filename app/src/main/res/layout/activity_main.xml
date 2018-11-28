@@ -13,9 +13,8 @@
         android:text="Get homeworks"
         app:layout_constraintTop_toBottomOf="@id/btn_logout" />
 
-    <TextView
-        android:id="@+id/homeworks"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/tasks_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btn_homeworks" />
+        android:layout_height="wrap_content" />
 </android.support.constraint.ConstraintLayout>

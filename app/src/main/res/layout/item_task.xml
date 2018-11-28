@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="100dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        android:background="@drawable/task_card_bg">
+
+        <TextView
+            android:id="@+id/tv_short_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="4dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#ffffff"
+            android:textSize="21sp"
+            android:textStyle="normal"
+            tools:text="ТЗ.3" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_short_name"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="4dp"
+            android:fontFamily="sans-serif-black"
+            android:maxLines="20"
+            android:textColor="#ffffff"
+            android:textStyle="normal"
+            tools:text="Тест тест тест" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/ongoing_badge"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/ongoing_task_circle" />
+</FrameLayout>

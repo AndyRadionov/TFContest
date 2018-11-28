@@ -2,6 +2,7 @@ package com.radionov.tfcontests.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -15,6 +16,7 @@ import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.ui.login.LoginActivity
 import com.radionov.tfcontests.ui.profile.ProfileActivity
 import com.radionov.tfcontests.ui.settings.SettingsActivity
+import com.radionov.tfcontests.utils.TaskStatuses
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -27,12 +29,19 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     @ProvidePresenter
     fun providePresenter() = mainPresenter
+    private lateinit var tasksAdapter: TasksAdapter
+    private val clickListener = object : TasksAdapter.OnItemClickListener {
+        override fun onClick(url: String) {
+            //todo implement
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ContestApp.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        init()
         btn_homeworks.setOnClickListener { mainPresenter.getHomeWorks() }
     }
 
@@ -59,10 +68,19 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showTasks(tasks: List<Task>) {
-        homeworks.text = tasks.joinToString(transform = { t -> t.task.title })
+        val ongoingTask = tasks.firstOrNull { task -> task.status == TaskStatuses.ONGOING.title }
+        tasksAdapter.updateData(tasks)
+        ongoingTask?.let { tasks_container.smoothScrollToPosition(tasks.indexOf(ongoingTask)) }
     }
 
     override fun showError() {
         Toasty.error(this@MainActivity, "Error", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun init() {
+        tasksAdapter = TasksAdapter(clickListener)
+
+        tasks_container.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        tasks_container.adapter = tasksAdapter
     }
 }

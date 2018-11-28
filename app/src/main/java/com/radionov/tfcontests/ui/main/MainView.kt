@@ -12,6 +12,5 @@ import com.radionov.tfcontests.data.entities.Task
 interface MainView : MvpView {
 
     fun showTasks(tasks: List<Task>)
-
     fun showError()
 }
