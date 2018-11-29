@@ -6,14 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <Button
-        android:id="@+id/btn_homeworks"
+    <View
+        android:id="@+id/tests_divider"
+        style="@style/Divider"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <TextView
+        android:layout_margin="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tests_divider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get homeworks"
-        app:layout_constraintTop_toBottomOf="@id/btn_logout" />
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="#333333"
+        android:lineSpacingExtra="5sp"
+        android:text="Тестовые задания" />
+
+    <TextView
+        android:id="@+id/tv_tests_number"
+        android:layout_margin="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tests_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="#458bf6"
+        android:lineSpacingExtra="5sp"
+        android:text="@string/all_tests_placeholder"
+        tools:text="@string/all_tests" />
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tests_number"
         android:id="@+id/tasks_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

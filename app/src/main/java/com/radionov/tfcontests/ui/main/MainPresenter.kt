@@ -32,9 +32,8 @@ class MainPresenter @Inject constructor(
                     tasks.sortWith(Comparator<Task> { o1, o2 ->
                         if (o1.status == o2.status) return@Comparator 0
 
-                        TaskStatuses.ONGOING.name
-                        val status1 = TaskStatuses.valueOf(o1.status)
-                        val status2 = TaskStatuses.valueOf(o2.status)
+                        val status1 = TaskStatuses.valueOf(o1.status.toUpperCase())
+                        val status2 = TaskStatuses.valueOf(o2.status.toUpperCase())
                         return@Comparator status1.compareTo(status2)
                     })
                     viewState.showTasks(tasks)

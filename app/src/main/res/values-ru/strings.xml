@@ -18,9 +18,11 @@
     <string name="education">Образование</string>
     <string name="region">Город проживания</string>
     <string name="email">Элетронная почта</string>
-    <string name="contacs">Контактная информация</string>
+    <string name="contacts">Контактная информация</string>
     <string name="birthday">Дата рождения</string>
     <string name="name">ФИО</string>
     <string name="my_course">Мой курс</string>
     <string name="name_error">Введите имя и фамилию</string>
+    <string name="all_tests">ВСЕ %d</string>
+    <string name="all_tests_placeholder">ВСЕ 0</string>
 </resources>

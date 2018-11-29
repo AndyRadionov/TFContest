@@ -42,7 +42,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
 
         init()
-        btn_homeworks.setOnClickListener { mainPresenter.getHomeWorks() }
+        mainPresenter.getHomeWorks()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,6 +68,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showTasks(tasks: List<Task>) {
+        tv_tests_number.text = getString(R.string.all_tests, tasks.size)
         val ongoingTask = tasks.firstOrNull { task -> task.status == TaskStatuses.ONGOING.title }
         tasksAdapter.updateData(tasks)
         ongoingTask?.let { tasks_container.smoothScrollToPosition(tasks.indexOf(ongoingTask)) }
