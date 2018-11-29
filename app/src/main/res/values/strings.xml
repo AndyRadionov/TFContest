@@ -25,4 +25,5 @@
     <string name="name_error">Enter first and last names</string>
     <string name="all_tests">ALL %d</string>
     <string name="all_tests_placeholder">ALL 0</string>
+    <string name="ok" translatable="false">OK</string>
 </resources>

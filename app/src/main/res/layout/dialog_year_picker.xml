@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:id="@+id/tv_year_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:padding="16dp"
+        android:text="demo"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="2018" />
+
+    <NumberPicker
+        android:id="@+id/year_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_year_text"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btn_cancel_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/year_picker"
+        android:layout_toLeftOf="@+id/btn_ok_year"
+        android:background="@null"
+        android:text="@string/cancel"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/btn_ok_year"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/year_picker"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:background="@null"
+        android:text="@string/ok"
+        android:textColor="@color/colorAccent" />
+
+</RelativeLayout>
