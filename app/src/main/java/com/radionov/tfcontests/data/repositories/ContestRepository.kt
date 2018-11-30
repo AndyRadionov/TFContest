@@ -8,4 +8,6 @@ import com.radionov.tfcontests.data.datasource.remote.FintechApi
 class ContestRepository(private val fintechApi: FintechApi) {
 
     fun getHomeWorks() = fintechApi.getHomeWorks()
+
+    fun getContest(url: String) = fintechApi.getProblemList(url)
 }

@@ -16,4 +16,7 @@ class ContestInteractor(private val contestRepository: ContestRepository) {
             .flatMap { homeWork -> Observable.fromIterable(homeWork.tasks) }
             .filter { task -> task.task.taskType == "test_during_lecture" }
             .toList()
+
+    fun getContest(url: String) =
+            contestRepository.getContest(url)
 }

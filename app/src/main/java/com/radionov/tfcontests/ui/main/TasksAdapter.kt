@@ -18,7 +18,7 @@ class TasksAdapter(private val clickListener: OnItemClickListener):
     private val tasks = ArrayList<Task>()
 
     interface OnItemClickListener {
-        fun onClick(url: String)
+        fun onClick(task: Task)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): TaskViewHolder {
@@ -50,13 +50,13 @@ class TasksAdapter(private val clickListener: OnItemClickListener):
             val task = tasks[position]
             itemView.tv_short_name.text = task.task.shortName
             itemView.tv_title.text = task.task.title
-            val isOngoing = task.status == TaskStatuses.ONGOING.title
+            val isOngoing = task.task.contestInfo.contestStatus.status == TaskStatuses.ONGOING.title
             itemView.ongoing_badge.visibility = if (isOngoing) View.VISIBLE else View.INVISIBLE
         }
 
         override fun onClick(v: View) {
-            val url = tasks[adapterPosition].task.contestInfo.contestUrl
-            clickListener.onClick(url)
+            val task = tasks[adapterPosition]
+            clickListener.onClick(task)
         }
     }
 }

@@ -32,16 +32,29 @@ class MainPresenter @Inject constructor(
                     tasks.sortWith(Comparator<Task> { o1, o2 ->
                         if (o1.status == o2.status) return@Comparator 0
 
-                        val status1 = TaskStatuses.valueOf(o1.status.toUpperCase())
-                        val status2 = TaskStatuses.valueOf(o2.status.toUpperCase())
+                        val status1 = TaskStatuses.valueOf(o1.task.contestInfo.contestStatus.status.toUpperCase())
+                        val status2 = TaskStatuses.valueOf(o2.task.contestInfo.contestStatus.status.toUpperCase())
                         return@Comparator status1.compareTo(status2)
                     })
                     viewState.showTasks(tasks)
                 } else {
                     viewState.showError()
                 }
-            }, {
-                viewState.showError()
-            })
+            }, { viewState.showError() })
+    }
+
+    fun getContest(task: Task) {
+        disposable?.dispose()
+
+        disposable = contestInteractor.getContest(task.task.contestInfo.contestUrl)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ problems ->
+                if (problems != null && problems.isNotEmpty()) {
+                    viewState.showContest(task, problems)
+                } else {
+                    viewState.showError()
+                }
+            }, { viewState.showError() })
     }
 }

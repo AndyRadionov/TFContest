@@ -12,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.ContestApp
+import com.radionov.tfcontests.data.entities.Problem
 import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.ui.login.LoginActivity
 import com.radionov.tfcontests.ui.profile.ProfileActivity
@@ -31,8 +32,13 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     fun providePresenter() = mainPresenter
     private lateinit var tasksAdapter: TasksAdapter
     private val clickListener = object : TasksAdapter.OnItemClickListener {
-        override fun onClick(url: String) {
+        override fun onClick(task: Task) {
             //todo implement
+            if (task.status == TaskStatuses.FAILED.title) {
+                Toasty.error(this@MainActivity, "Тест не сдавался", Toast.LENGTH_SHORT).show()
+            } else {
+                mainPresenter.getContest(task)
+            }
         }
     }
 
@@ -68,10 +74,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showTasks(tasks: List<Task>) {
+        test_chart.setRingOverallProgress(80.toFloat())
         tv_tests_number.text = getString(R.string.all_tests, tasks.size)
-        val ongoingTask = tasks.firstOrNull { task -> task.status == TaskStatuses.ONGOING.title }
+        val ongoingTask = tasks.firstOrNull {
+                task -> task.task.contestInfo.contestStatus.status== TaskStatuses.ONGOING.title
+        }
         tasksAdapter.updateData(tasks)
         ongoingTask?.let { tasks_container.smoothScrollToPosition(tasks.indexOf(ongoingTask)) }
+    }
+
+    override fun showContest(task: Task, problems: List<Problem>) {
+        Toasty.success(this, problems.toString(), Toast.LENGTH_LONG).show()
     }
 
     override fun showError() {

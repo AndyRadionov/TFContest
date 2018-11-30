@@ -18,7 +18,7 @@ class AuthRepository(
 
     fun restorePass(email: String) = fintechApi.restorePass(email)
 
-    fun logout() = fintechApi.logout(prefs.getCsrfCookie())
+    fun logout() = fintechApi.logout()
 
     fun getAuthCookie() = prefs.getAuthCookie()
 

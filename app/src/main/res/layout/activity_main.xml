@@ -6,15 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
+
+    <com.lalongooo.Rings
+        android:id="@+id/test_chart"
+        app:rings_inner_first_color="#FF9F1C"
+        app:rings_inner_first_progress="30"
+        app:rings_inner_first_text="Java"
+        app:rings_inner_second_color="#4BC6B9"
+        app:rings_inner_second_progress="75"
+        app:rings_inner_second_text="Kotlin"
+        app:rings_inner_third_color="#757780"
+        app:rings_inner_third_progress="85"
+        app:rings_inner_third_text="Android"
+        app:rings_overall_color="#EA3546"
+        app:rings_overall_progress="100"
+        app:rings_overall_text=""
+        app:rings_text_size="20sp"
+        app:rings_unfinished_color="#f2f2f2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+
     <View
         android:id="@+id/tests_divider"
         style="@style/Divider"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/test_chart" />
 
     <TextView
         android:layout_margin="16dp"

@@ -18,3 +18,9 @@ fun User.setName(name: String) {
         this.middleName = nameArr[2]
     }
 }
+
+fun String.substringBetween(delimiterAfter: Char, delimiterBefore: Char, missingDelimiterValue: String = this): String {
+    val indexAfter = indexOf(delimiterAfter)
+    val indexBefore = indexOf(delimiterBefore)
+    return if (indexAfter == -1 || indexBefore == -1) missingDelimiterValue else substring(indexAfter + 1, indexBefore)
+}

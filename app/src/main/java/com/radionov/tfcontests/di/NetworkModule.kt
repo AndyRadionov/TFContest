@@ -17,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.util.*
 import javax.inject.Singleton
+import kotlin.collections.HashSet
 
 /**
  * @author Andrey Radionov
@@ -49,7 +50,10 @@ class NetworkModule {
         return Interceptor { chain ->
             val builder = chain.request().newBuilder()
 
-            prefs.getAuthCookie()?.let { builder.addHeader("Cookie", it) }
+            prefs.getCsrfToken()?.let {
+                builder.addHeader("Cookie", prefs.getCookie())
+                builder.addHeader("X-CSRFToken", it)
+            }
 
             builder.addHeader("Referer", BuildConfig.TF_URL)
 
@@ -63,7 +67,7 @@ class NetworkModule {
             val originalResponse = chain.proceed(chain.request())
 
             val cookies = prefs.getCookies() as HashSet<String>
-            if (cookies.isEmpty() && !originalResponse.headers(setCookieHeader).isEmpty()) {
+            if (cookies.isEmpty() && originalResponse.headers(setCookieHeader).isNotEmpty()) {
 
                 originalResponse.headers(setCookieHeader).forEach {
                     cookies.add(it)

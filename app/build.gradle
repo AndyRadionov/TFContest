@@ -47,6 +47,9 @@ dependencies {
     implementation "com.android.support:design:$versions.ANDROID_SUPPORT"
     implementation "com.android.support.constraint:constraint-layout:$versions.CONSTRAINT_LAYOUT"
 
+    //Charts
+    implementation 'com.lalongooo:rings:1.0.0'
+
     //Logging
     implementation 'com.facebook.stetho:stetho:1.5.0'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
