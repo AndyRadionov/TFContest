@@ -28,4 +28,8 @@
     <string name="all_tests_placeholder">ВСЕ 0</string>
     <string name="profile_updated">Профиль обновлен</string>
     <string name="error_update_profile">Не удалось обновить профиль</string>
+    <string name="test_tasks">Тестовые задания</string>
+    <string name="tests_title">Тестов</string>
+    <string name="done">Пройдено</string>
+    <string name="points_title">Балла</string>
 </resources>

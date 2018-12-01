@@ -6,71 +6,174 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-
-    <com.lalongooo.Rings
-        android:id="@+id/test_chart"
-        app:rings_inner_first_color="#FF9F1C"
-        app:rings_inner_first_progress="30"
-        app:rings_inner_first_text="Java"
-        app:rings_inner_second_color="#4BC6B9"
-        app:rings_inner_second_progress="75"
-        app:rings_inner_second_text="Kotlin"
-        app:rings_inner_third_color="#757780"
-        app:rings_inner_third_progress="85"
-        app:rings_inner_third_text="Android"
-        app:rings_overall_color="#EA3546"
-        app:rings_overall_progress="100"
-        app:rings_overall_text=""
-        app:rings_text_size="20sp"
-        app:rings_unfinished_color="#f2f2f2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="120dp"
-        android:layout_height="120dp" />
-
-    <View
-        android:id="@+id/tests_divider"
-        style="@style/Divider"
-        android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/test_chart" />
-
     <TextView
-        android:layout_margin="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tests_divider"
+        android:id="@+id/tv_progress_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableRight="@drawable/tests_count_badge"
+        android:drawablePadding="4dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/tests_title"
+        android:textColor="#9299a2"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tests_chart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="-0.01"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tests_chart"
+        app:layout_constraintTop_toBottomOf="@id/tv_progress_label"
+        tools:text="15/18" />
+
+    <TextView
+        android:id="@+id/tv_tests_percent"
+        app:layout_constraintLeft_toLeftOf="@id/tests_chart"
+        app:layout_constraintRight_toRightOf="@id/tests_chart"
+        app:layout_constraintTop_toTopOf="@id/tests_chart"
+        app:layout_constraintBottom_toBottomOf="@id/tests_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:letterSpacing="-0.01"
+        tools:text="80%" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="@id/tests_chart"
+        app:layout_constraintRight_toRightOf="@id/tests_chart"
+        app:layout_constraintTop_toBottomOf="@id/tv_tests_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#9299a2"
+        android:letterSpacing="-0.01"
+        android:text="@string/done"
+        />
+
+    <com.hookedonplay.decoviewlib.DecoView
+        android:id="@+id/tests_chart"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_progress_label" />
+
+    <TextView
+        android:id="@+id/tv_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vertical_divider"
+        app:layout_constraintTop_toTopOf="@id/vertical_divider" />
+
+    <TextView
+        android:text="@string/points_title"
         android:textSize="14sp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="#333333"
-        android:lineSpacingExtra="5sp"
-        android:text="Тестовые задания" />
-
-    <TextView
-        android:id="@+id/tv_tests_number"
-        android:layout_margin="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tests_divider"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/vertical_divider"
+        app:layout_constraintTop_toBottomOf="@id/tv_points"
+        android:id="@+id/tv_points_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif-medium"
-        android:textStyle="normal"
-        android:textColor="#458bf6"
-        android:lineSpacingExtra="5sp"
-        android:text="@string/all_tests_placeholder"
-        tools:text="@string/all_tests" />
+        android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
+    <View
+        android:id="@+id/vertical_divider"
+        style="@style/VerticalDivider"
         android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_tests_number"
+        app:layout_constraintTop_toBottomOf="@id/tests_chart" />
+
+    <TextView
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/vertical_divider"
+        app:layout_constraintTop_toTopOf="@id/vertical_divider"
+        android:id="@+id/tv_tests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textColor="#333333" />
+
+    <TextView
+        android:text="@string/tests_title"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#333333"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/vertical_divider"
+        app:layout_constraintTop_toBottomOf="@id/tv_tests"
+        android:id="@+id/tv_tests_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/tests_divider"
+        style="@style/HorizontalDivider"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_points_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:lineSpacingExtra="5sp"
+        android:text="@string/test_tasks"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tests_divider" />
+
+    <TextView
+        android:id="@+id/tv_tests_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:lineSpacingExtra="5sp"
+        android:text="@string/all_tests_placeholder"
+        android:textColor="#458bf6"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tests_divider"
+        tools:text="@string/all_tests" />
+
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/tasks_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tests_all" />
 </android.support.constraint.ConstraintLayout>

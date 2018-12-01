@@ -12,7 +12,7 @@ import com.radionov.tfcontests.data.entities.Task
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView : MvpView {
 
-    fun showTasks(tasks: List<Task>)
+    fun showTasks(tasks: List<Task>, done: Int, points: Float)
     fun showContest(task: Task, problems: List<Problem>)
     fun showError()
 }

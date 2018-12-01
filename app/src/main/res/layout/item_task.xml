@@ -24,6 +24,19 @@
             tools:text="ТЗ.3" />
 
         <TextView
+            android:id="@+id/tv_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="4dp"
+            android:fontFamily="sans-serif-black"
+            android:text="0.0"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:visibility="invisible" />
+
+        <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

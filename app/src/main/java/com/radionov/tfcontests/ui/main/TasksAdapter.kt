@@ -1,5 +1,7 @@
 package com.radionov.tfcontests.ui.main
 
+import android.opengl.Visibility
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +45,14 @@ class TasksAdapter(private val clickListener: OnItemClickListener):
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
+        private val failColor: Int
+        private val acceptColor: Int
+
+        init {
+            val resources = itemView.resources
+            failColor = ResourcesCompat.getColor(resources, R.color.task_red_color, null)
+            acceptColor = ResourcesCompat.getColor(resources, android.R.color.white, null)
+        }
 
         fun bind(position: Int) {
             itemView.setOnClickListener(this)
@@ -51,7 +61,16 @@ class TasksAdapter(private val clickListener: OnItemClickListener):
             itemView.tv_short_name.text = task.task.shortName
             itemView.tv_title.text = task.task.title
             val isOngoing = task.task.contestInfo.contestStatus.status == TaskStatuses.ONGOING.title
+            val isFailed = task.status == TaskStatuses.FAILED.title
+            val isAccepted = task.status == TaskStatuses.ACCEPTED.title
             itemView.ongoing_badge.visibility = if (isOngoing) View.VISIBLE else View.INVISIBLE
+            if (isFailed || isAccepted) {
+                itemView.tv_point.visibility = View.VISIBLE
+                itemView.tv_point.text = task.mark
+                itemView.tv_point.setTextColor(if (isFailed) failColor else acceptColor)
+            } else {
+                itemView.tv_point.visibility = View.INVISIBLE
+            }
         }
 
         override fun onClick(v: View) {

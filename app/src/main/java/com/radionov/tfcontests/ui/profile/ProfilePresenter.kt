@@ -28,7 +28,7 @@ class ProfilePresenter @Inject constructor(
             .compose(rxComposers.getSingleComposer())
             .subscribe({ user ->
                 viewState.showProfile(user)
-            }, {e->
+            }, {
                 viewState.showError()
             })
     }

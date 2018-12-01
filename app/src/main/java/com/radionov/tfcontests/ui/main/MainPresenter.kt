@@ -24,9 +24,8 @@ class MainPresenter @Inject constructor(
         disposable?.dispose()
 
         disposable = contestInteractor.getHomeWorks()
-            .compose(rxComposers.getSingleComposer())
-            .subscribe({ tasks ->
-                if (tasks != null && tasks.isNotEmpty()) {
+            .map { tasks ->
+                if (tasks.isNotEmpty()) {
                     tasks.sortWith(Comparator<Task> { o1, o2 ->
                         if (o1.status == o2.status) return@Comparator 0
 
@@ -34,7 +33,19 @@ class MainPresenter @Inject constructor(
                         val status2 = TaskStatuses.valueOf(o2.task.contestInfo.contestStatus.status.toUpperCase())
                         return@Comparator status1.compareTo(status2)
                     })
-                    viewState.showTasks(tasks)
+                }
+                val doneAndPoints = tasks.fold(0 to 0F) { doneAndPoints, task ->
+                    val done = doneAndPoints.first + if (TaskStatuses.valueOf(task.status.toUpperCase()) == TaskStatuses.ACCEPTED) 1 else 0
+                    val points = doneAndPoints.second + task.mark.toFloat()
+                    return@fold done to points
+                }
+
+                return@map tasks to doneAndPoints
+            }
+            .compose(rxComposers.getSingleComposer())
+            .subscribe({ result ->
+                if (result.first.isNotEmpty()) {
+                    viewState.showTasks(result.first, result.second.first, result.second.second)
                 } else {
                     viewState.showError()
                 }

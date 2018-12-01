@@ -8,6 +8,7 @@ import com.radionov.tfcontests.data.entities.UserWithStatus
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 
+
 /**
  * @author Andrey Radionov
  */
@@ -20,7 +21,7 @@ class UserRepository(
     fun getRemoteUser() = fintechApi.getUser()
 
     fun updateRemoteUser(user: UserWithStatus) =
-        fintechApi.updateUser(prefs.getCsrfCookie(), user.user)
+        fintechApi.updateUser(user.user)
 
     fun getLocalUser() = userDao.getUser()
 

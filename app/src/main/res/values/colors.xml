@@ -9,6 +9,7 @@
     <color name="text_color">#333333</color>
     <color name="disabled_text_color">#808080</color>
     <color name="btn_blue">#458bf6</color>
+    <color name="light_gray">#eeeeee</color>
     <color name="test_bg">#74dfb0</color>
-    <color name="ongoing_task_color">#d95c5c</color>
+    <color name="task_red_color">#d95c5c</color>
 </resources>

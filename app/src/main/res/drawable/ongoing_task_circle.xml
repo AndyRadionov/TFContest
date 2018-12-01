@@ -4,7 +4,7 @@
     android:shape="oval">
 
     <solid
-        android:color="@color/ongoing_task_color"/>
+        android:color="@color/task_red_color"/>
 
     <stroke
         android:width="2dp"
