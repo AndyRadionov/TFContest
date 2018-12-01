@@ -19,6 +19,7 @@ import com.radionov.tfcontests.utils.formatBirthday
 import com.radionov.tfcontests.utils.getName
 import com.radionov.tfcontests.utils.setName
 import com.squareup.picasso.Picasso
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.dialog_year_picker.*
 import java.util.*
@@ -36,10 +37,11 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
 
     @ProvidePresenter
     fun providePresenter() = profilePresenter
+
     private lateinit var currentUser: User
     private var buttonsState: Boolean = false
 
-    private val textWatcher = object :TextWatcher{
+    private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
@@ -50,6 +52,7 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
         override fun afterTextChanged(s: Editable?) {
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         ContestApp.appComponent.inject(this)
         super.onCreate(savedInstanceState)
@@ -101,27 +104,30 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
     override fun showSuccess() {
         swipe_container.isRefreshing = false
         changeButtonsState()
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+        Toasty.success(this, getString(R.string.profile_updated), Toast.LENGTH_SHORT).show()
     }
 
     override fun showError() {
         swipe_container.isRefreshing = false
+        Toasty.error(this, getString(R.string.error_update_profile), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNameInput() {
+        name_layout.error = ""
+        parseUserData()
+        profilePresenter.updateProfile(currentUser)
         changeButtonsState()
-        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNameInputFail(errorStringId: Int) {
+        name_layout.error = getString(errorStringId)
     }
 
     private fun init() {
         swipe_container.setOnRefreshListener { profilePresenter.fetchUpdate() }
         btn_save.setOnClickListener {
             val name = et_name.text.toString()
-            if (InputValidator.isNameValid(name)) {
-                name_layout.error = ""
-                parseUserData()
-                profilePresenter.updateProfile(currentUser)
-                changeButtonsState()
-            } else {
-                name_layout.error = getString(R.string.name_error)
-            }
+            profilePresenter.isNameValid(name)
         }
         btn_cancel.setOnClickListener {
             profilePresenter.getProfile()
@@ -141,7 +147,7 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
     }
 
     private fun parseUserData() {
-        with (currentUser) {
+        with(currentUser) {
             setName(et_name.text.toString())
             birthday = et_birthday.text.toString()
             region = et_region.text.toString()

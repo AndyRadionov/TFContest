@@ -22,7 +22,10 @@
     <string name="birthday">Дата рождения</string>
     <string name="name">ФИО</string>
     <string name="my_course">Мой курс</string>
-    <string name="name_error">Введите имя и фамилию</string>
+    <string name="name_rus_error">Введите имя кирилицей</string>
+    <string name="name_full_error">Введите имя и фамилию</string>
     <string name="all_tests">ВСЕ %d</string>
     <string name="all_tests_placeholder">ВСЕ 0</string>
+    <string name="profile_updated">Профиль обновлен</string>
+    <string name="error_update_profile">Не удалось обновить профиль</string>
 </resources>

@@ -5,11 +5,15 @@ package com.radionov.tfcontests.utils
  */
 object InputValidator {
 
-    fun isNameValid(name: String): Boolean {
-        val nameArr = name.split("\\s+".toRegex())
-        if (nameArr.size < 2 || nameArr.size > 3) {
-            return false
-        }
-        return true
+    private val rusPattern = "[А-Яа-я\\s]+".toPattern()
+    private val fullNameSplitRegex = "\\s+".toRegex()
+
+    fun isNameNotRus(name: String): Boolean {
+        return !rusPattern.matcher(name).matches()
+    }
+
+    fun isNameNotFull(name: String): Boolean {
+        val nameArr = name.split(fullNameSplitRegex)
+        return nameArr.size !in 2..3
     }
 }

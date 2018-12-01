@@ -11,6 +11,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 interface SettingsView: MvpView {
 
     fun onLogout()
-
     fun onLogoutFail()
 }

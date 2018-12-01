@@ -2,9 +2,11 @@ package com.radionov.tfcontests.ui.profile
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.User
 import com.radionov.tfcontests.data.entities.UserWithStatus
 import com.radionov.tfcontests.interactors.UserInteractor
+import com.radionov.tfcontests.utils.InputValidator
 import com.radionov.tfcontests.utils.RxComposers
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -51,5 +53,13 @@ class ProfilePresenter @Inject constructor(
             }, {
                 viewState.showError()
             })
+    }
+
+    fun isNameValid(name: String) {
+        when {
+            InputValidator.isNameNotRus(name) -> viewState.onNameInputFail(R.string.name_full_error)
+            InputValidator.isNameNotFull(name) -> viewState.onNameInputFail(R.string.name_full_error)
+            else -> viewState.onNameInput()
+        }
     }
 }
