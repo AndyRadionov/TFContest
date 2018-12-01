@@ -5,9 +5,8 @@ import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.data.entities.User
 import com.radionov.tfcontests.data.entities.UserWithStatus
 import com.radionov.tfcontests.interactors.UserInteractor
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.radionov.tfcontests.utils.RxComposers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -15,7 +14,8 @@ import javax.inject.Inject
  */
 @InjectViewState
 class ProfilePresenter @Inject constructor(
-    private val userInteractor: UserInteractor
+    private val userInteractor: UserInteractor,
+    private val rxComposers: RxComposers
 ) : MvpPresenter<ProfileView>() {
 
     private var disposable: Disposable? = null
@@ -23,8 +23,7 @@ class ProfilePresenter @Inject constructor(
     fun getProfile() {
         disposable?.dispose()
         disposable = userInteractor.getStoredUser()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(rxComposers.getSingleComposer())
             .subscribe({ user ->
                 viewState.showProfile(user)
             }, {e->
@@ -35,8 +34,7 @@ class ProfilePresenter @Inject constructor(
     fun fetchUpdate() {
         disposable?.dispose()
         disposable = userInteractor.fetchUpdate()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(rxComposers.getSingleComposer())
             .subscribe({ user ->
                 viewState.showProfile(user)
             }, {
@@ -47,8 +45,7 @@ class ProfilePresenter @Inject constructor(
     fun updateProfile(user: User) {
         disposable?.dispose()
         disposable = userInteractor.updateUser(UserWithStatus(user))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(rxComposers.getCompletableComposer())
             .subscribe({
                 viewState.showSuccess()
             }, {

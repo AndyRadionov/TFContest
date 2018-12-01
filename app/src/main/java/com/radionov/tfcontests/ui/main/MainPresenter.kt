@@ -3,12 +3,10 @@ package com.radionov.tfcontests.ui.main
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.data.entities.Task
-import com.radionov.tfcontests.interactors.AuthInteractor
 import com.radionov.tfcontests.interactors.ContestInteractor
+import com.radionov.tfcontests.utils.RxComposers
 import com.radionov.tfcontests.utils.TaskStatuses
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -16,7 +14,8 @@ import javax.inject.Inject
  */
 @InjectViewState
 class MainPresenter @Inject constructor(
-    private val contestInteractor: ContestInteractor
+    private val contestInteractor: ContestInteractor,
+    private val rxComposers: RxComposers
 ) : MvpPresenter<MainView>() {
 
     private var disposable: Disposable? = null
@@ -25,8 +24,7 @@ class MainPresenter @Inject constructor(
         disposable?.dispose()
 
         disposable = contestInteractor.getHomeWorks()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(rxComposers.getSingleComposer())
             .subscribe({ tasks ->
                 if (tasks != null && tasks.isNotEmpty()) {
                     tasks.sortWith(Comparator<Task> { o1, o2 ->
@@ -47,8 +45,7 @@ class MainPresenter @Inject constructor(
         disposable?.dispose()
 
         disposable = contestInteractor.getContest(task.task.contestInfo.contestUrl)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(rxComposers.getSingleComposer())
             .subscribe({ problems ->
                 if (problems != null && problems.isNotEmpty()) {
                     viewState.showContest(task, problems)

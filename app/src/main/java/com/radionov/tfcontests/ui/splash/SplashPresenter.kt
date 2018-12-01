@@ -9,8 +9,9 @@ import javax.inject.Inject
  * @author Andrey Radionov
  */
 @InjectViewState
-class SplashPresenter @Inject constructor(private val authInteractor: AuthInteractor) :
-    MvpPresenter<SplashView>() {
+class SplashPresenter @Inject constructor(
+    private val authInteractor: AuthInteractor
+) : MvpPresenter<SplashView>() {
 
     fun checkLogin() {
         if (authInteractor.checkLogin()) {
