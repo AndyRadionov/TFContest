@@ -12,3 +12,8 @@ data class ContestResponse(
     val contest: Contest,
     val problems: List<String?>
 )
+
+data class Answer(
+    val answer: String,
+    val language: Int = 1
+)

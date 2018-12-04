@@ -42,4 +42,16 @@ class ContestPresenter @Inject constructor(
                 }
             }, { viewState.showError(R.string.error_load_test) })
     }
+
+    fun startContest() {
+
+    }
+
+    fun getQuestion() {
+
+    }
+
+    fun answerQuestion() {
+
+    }
 }

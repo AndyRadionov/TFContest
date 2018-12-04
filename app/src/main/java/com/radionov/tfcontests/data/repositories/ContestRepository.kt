@@ -1,6 +1,7 @@
 package com.radionov.tfcontests.data.repositories
 
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
+import com.radionov.tfcontests.data.entities.Answer
 
 /**
  * @author Andrey Radionov
@@ -13,7 +14,10 @@ class ContestRepository(private val fintechApi: FintechApi) {
 
     fun getContest(url: String) = fintechApi.getProblemList(url)
 
-    fun startContest(url: String) = fintechApi.startTest(url)
+    fun startContest(url: String) = fintechApi.startContest(url)
 
-    fun answerQuestion(url: String) = fintechApi.answerQuestion(url)
+    fun getQuestion(url: String, questionId: Int) = fintechApi.getQuestion(url, questionId)
+
+    fun answerQuestion(url: String, questionId: Int, answer: Answer) =
+        fintechApi.answerQuestion(url, questionId, answer)
 }
