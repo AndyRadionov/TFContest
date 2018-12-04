@@ -1,6 +1,5 @@
 package com.radionov.tfcontests.di
 
-import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.radionov.tfcontests.BuildConfig
 import com.radionov.tfcontests.data.datasource.local.Prefs
@@ -9,15 +8,11 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import java.util.*
 import javax.inject.Singleton
-import kotlin.collections.HashSet
 
 /**
  * @author Andrey Radionov

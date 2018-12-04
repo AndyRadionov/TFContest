@@ -14,7 +14,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
-import com.radionov.tfcontests.data.entities.ContestResponse
 import com.radionov.tfcontests.data.entities.Problem
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_dialog_contest.*

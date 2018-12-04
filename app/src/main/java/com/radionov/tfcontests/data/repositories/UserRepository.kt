@@ -8,7 +8,6 @@ import com.radionov.tfcontests.data.entities.UserWithStatus
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 
-
 /**
  * @author Andrey Radionov
  */

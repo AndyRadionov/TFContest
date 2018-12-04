@@ -1,10 +1,7 @@
 package com.radionov.tfcontests.data.repositories
 
 import com.radionov.tfcontests.data.datasource.local.Prefs
-import com.radionov.tfcontests.data.datasource.local.db.UserDao
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
-import com.radionov.tfcontests.data.entities.User
-import io.reactivex.Completable
 
 /**
  * @author Andrey Radionov

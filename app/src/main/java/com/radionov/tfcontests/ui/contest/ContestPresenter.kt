@@ -3,10 +3,8 @@ package com.radionov.tfcontests.ui.contest
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.R
-import com.radionov.tfcontests.data.entities.ContestInfo
 import com.radionov.tfcontests.data.entities.ContestResponse
 import com.radionov.tfcontests.data.entities.Problem
-import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.interactors.ContestInteractor
 import com.radionov.tfcontests.utils.RxComposers
 import io.reactivex.Single

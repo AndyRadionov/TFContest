@@ -1,7 +1,7 @@
-package com.radionov.tfcontests.ui.main
+package com.radionov.tfcontests.ui.main.adapter
 
-import android.opengl.Visibility
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.recyclerview.extensions.AsyncListDiffer
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_task.view.*
 class TasksAdapter(private val clickListener: OnItemClickListener):
     RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
 
-    private val tasks = ArrayList<Task>()
+    private val differ = AsyncListDiffer<Task>(this, TasksDiffCallback())
 
     interface OnItemClickListener {
         fun onClick(task: Task)
@@ -34,13 +34,10 @@ class TasksAdapter(private val clickListener: OnItemClickListener):
         viewHolder.bind(i)
     }
 
-    override fun getItemCount() = tasks.size
+    override fun getItemCount() = differ.currentList.size
 
     fun updateData(tasks: List<Task>) {
-        //todo change to Differ
-        this.tasks.clear()
-        this.tasks.addAll(tasks)
-        notifyDataSetChanged()
+        differ.submitList(tasks)
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -57,7 +54,7 @@ class TasksAdapter(private val clickListener: OnItemClickListener):
         fun bind(position: Int) {
             itemView.setOnClickListener(this)
 
-            val task = tasks[position]
+            val task = differ.currentList[position]
             itemView.tv_short_name.text = task.task.shortName
             itemView.tv_title.text = task.task.title
             val isOngoing = task.task.contestInfo.contestStatus.status == TaskStatuses.ONGOING.title
@@ -74,7 +71,7 @@ class TasksAdapter(private val clickListener: OnItemClickListener):
         }
 
         override fun onClick(v: View) {
-            val task = tasks[adapterPosition]
+            val task = differ.currentList[adapterPosition]
             clickListener.onClick(task)
         }
     }

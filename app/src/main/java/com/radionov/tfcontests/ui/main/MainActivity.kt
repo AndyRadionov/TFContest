@@ -10,20 +10,19 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.radionov.tfcontests.R
+import com.hookedonplay.decoviewlib.charts.SeriesItem
+import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.radionov.tfcontests.ContestApp
-import com.radionov.tfcontests.data.entities.Problem
+import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.Task
+import com.radionov.tfcontests.ui.contest.ContestFragmentDialog
+import com.radionov.tfcontests.ui.main.adapter.TasksAdapter
 import com.radionov.tfcontests.ui.profile.ProfileActivity
 import com.radionov.tfcontests.ui.settings.SettingsActivity
 import com.radionov.tfcontests.utils.TaskStatuses
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-import com.hookedonplay.decoviewlib.charts.SeriesItem
-import com.hookedonplay.decoviewlib.events.DecoEvent
-import com.radionov.tfcontests.ui.contest.ContestFragmentDialog
-
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 

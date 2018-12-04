@@ -1,6 +1,5 @@
 package com.radionov.tfcontests.ui.main
 
-import android.widget.Toast
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.R
@@ -8,7 +7,6 @@ import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.interactors.ContestInteractor
 import com.radionov.tfcontests.utils.RxComposers
 import com.radionov.tfcontests.utils.TaskStatuses
-import es.dmoral.toasty.Toasty
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
