@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
+import com.radionov.tfcontests.ui.contest.ContestFragmentDialog
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
@@ -38,12 +39,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val clickListener = object : TasksAdapter.OnItemClickListener {
         override fun onClick(task: Task) {
-            //todo implement
-            if (task.status == TaskStatuses.FAILED.title) {
-                Toasty.error(this@MainActivity, "Тест не сдавался", Toast.LENGTH_SHORT).show()
-            } else {
-                mainPresenter.getContest(task)
-            }
+            mainPresenter.getContest(task)
         }
     }
 
@@ -99,12 +95,18 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         ongoingTask?.let { tasks_container.smoothScrollToPosition(tasks.indexOf(ongoingTask)) }
     }
 
-    override fun showContest(task: Task, problems: List<Problem>) {
-        Toasty.success(this, problems.toString(), Toast.LENGTH_LONG).show()
+    override fun openContest(contestUrl: String) {
+        ContestFragmentDialog
+            .newInstance(contestUrl)
+            .show(supportFragmentManager, ContestFragmentDialog.TAG)
     }
 
-    override fun showError() {
-        Toasty.error(this@MainActivity, "Error", Toast.LENGTH_SHORT).show()
+    override fun showError(errorResource: Int) {
+        Toasty.error(this@MainActivity, getString(errorResource), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showSuccess(successResource: Int) {
+        Toasty.success(this@MainActivity, getString(successResource), Toast.LENGTH_SHORT).show()
     }
 
     private fun init() {

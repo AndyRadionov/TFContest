@@ -26,11 +26,14 @@ interface FintechApi {
     @GET("course/android_fall2018/homeworks")
     fun getHomeWorks(): Observable<HomeWorksResponse>
 
-    @POST("contest/lecture_test_{id}/start_contest")
-    fun startTest(@Path("id") id: Int): Completable
+    @POST("contest/{url}/start_contest")
+    fun startTest(@Path("url") url: String): Completable
 
-    @GET("contest/lecture_test_{id}/status")
-    fun checkTestStatus(@Path("id") id: Int): Single<ContestResponse>
+    @POST("contest/{url}/problem/{id}")
+    fun answerQuestion(@Path("url") url: String): Completable
+
+    @GET("contest/{url}/status")
+    fun checkTestStatus(@Path("url") url: String): Single<ContestResponse>
 
     @GET("contest/{url}/problems")
     fun getProblemList(@Path("url") url: String): Single<List<Problem>>

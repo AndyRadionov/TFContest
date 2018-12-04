@@ -3,6 +3,7 @@ package com.radionov.tfcontests.utils
 /**
  * @author Andrey Radionov
  */
+const val ANSWERED_QUESTION_STATUS = "AC"
 
 enum class TaskStatuses(val title: String) {
     NEW("new"),

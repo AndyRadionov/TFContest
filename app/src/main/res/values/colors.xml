@@ -12,4 +12,5 @@
     <color name="light_gray">#eeeeee</color>
     <color name="test_bg">#74dfb0</color>
     <color name="task_red_color">#d95c5c</color>
+    <color name="blue_question">#8d9eeb</color>
 </resources>

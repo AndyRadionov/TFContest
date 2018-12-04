@@ -35,4 +35,12 @@
     <string name="tests_title">Тестов</string>
     <string name="done">Пройдено</string>
     <string name="points_title">Балла</string>
+    <string name="error_test_failed">Тест не сдавался</string>
+    <string name="sucess_test_pass">Тест успешно сдан</string>
+    <string name="error_test_announce">Тест не начался</string>
+    <string name="error_tests_not_found">Доступные тесты не найдены</string>
+    <string name="network_problems">Проблемы с сетью</string>
+    <string name="error_load_test">Не удалось загрузить тест</string>
+    <string name="login_hint">ЛОГИН</string>
+    <string name="pass_hint">ПАРОЛЬ</string>
 </resources>

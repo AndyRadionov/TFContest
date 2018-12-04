@@ -17,6 +17,7 @@ class ContestInteractor(private val contestRepository: ContestRepository) {
             .filter { task -> task.task.taskType == "test_during_lecture" }
             .toList()
 
-    fun getContest(url: String) =
-            contestRepository.getContest(url)
+    fun getContestStatus(url: String) = contestRepository.getContestStatus(url)
+
+    fun getContest(url: String) = contestRepository.getContest(url)
 }

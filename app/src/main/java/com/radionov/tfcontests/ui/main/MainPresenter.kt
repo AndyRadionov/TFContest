@@ -1,11 +1,14 @@
 package com.radionov.tfcontests.ui.main
 
+import android.widget.Toast
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.interactors.ContestInteractor
 import com.radionov.tfcontests.utils.RxComposers
 import com.radionov.tfcontests.utils.TaskStatuses
+import es.dmoral.toasty.Toasty
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -35,7 +38,8 @@ class MainPresenter @Inject constructor(
                     })
                 }
                 val doneAndPoints = tasks.fold(0 to 0F) { doneAndPoints, task ->
-                    val done = doneAndPoints.first + if (TaskStatuses.valueOf(task.status.toUpperCase()) == TaskStatuses.ACCEPTED) 1 else 0
+                    val done =
+                        doneAndPoints.first + if (TaskStatuses.valueOf(task.status.toUpperCase()) == TaskStatuses.ACCEPTED) 1 else 0
                     val points = doneAndPoints.second + task.mark.toFloat()
                     return@fold done to points
                 }
@@ -47,22 +51,31 @@ class MainPresenter @Inject constructor(
                 if (result.first.isNotEmpty()) {
                     viewState.showTasks(result.first, result.second.first, result.second.second)
                 } else {
-                    viewState.showError()
+                    viewState.showError(R.string.error_tests_not_found)
                 }
-            }, { viewState.showError() })
+            }, { viewState.showError(R.string.error_tests_not_found) })
     }
 
     fun getContest(task: Task) {
-        disposable?.dispose()
+        if (!checkTask(task)) {
+            return
+        }
 
-        disposable = contestInteractor.getContest(task.task.contestInfo.contestUrl)
-            .compose(rxComposers.getSingleComposer())
-            .subscribe({ problems ->
-                if (problems != null && problems.isNotEmpty()) {
-                    viewState.showContest(task, problems)
-                } else {
-                    viewState.showError()
-                }
-            }, { viewState.showError() })
+        viewState.openContest(task.task.contestInfo.contestUrl)
+    }
+
+    private fun checkTask(task: Task): Boolean {
+        when (task.task.contestInfo.contestStatus.status) {
+            TaskStatuses.ONGOING.title -> return true
+            TaskStatuses.ANNOUNCEMENT.title -> {
+                viewState.showError(R.string.error_test_announce)
+                return false
+            }
+        }
+        when (task.status) {
+            TaskStatuses.FAILED.title -> viewState.showError(R.string.error_test_failed)
+            TaskStatuses.ACCEPTED.title -> viewState.showSuccess(R.string.sucess_test_pass)
+        }
+        return false
     }
 }
