@@ -9,12 +9,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
+import com.radionov.tfcontests.ui.common.BaseActivity
 import com.radionov.tfcontests.ui.main.MainActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
-class LoginActivity : MvpAppCompatActivity(), LoginView {
+class LoginActivity : BaseActivity(), LoginView {
 
     @Inject
     @InjectPresenter

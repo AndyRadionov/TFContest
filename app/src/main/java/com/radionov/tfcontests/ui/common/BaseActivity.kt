@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -14,12 +15,26 @@ import com.radionov.tfcontests.utils.isInternetAvailable
 /**
  * @author Andrey Radionov
  */
+private const val NETWORK_STATE = "network_state"
+
 abstract class BaseActivity : MvpAppCompatActivity() {
+
+    private var networkState = true
 
     private val networkStatusReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             onNetworkChange(isInternetAvailable(this@BaseActivity))
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putBoolean(NETWORK_STATE, networkState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        networkState = savedInstanceState?.getBoolean(NETWORK_STATE) ?: true
     }
 
     override fun onResume() {
@@ -35,11 +50,13 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     }
 
     private fun onNetworkChange(isConnected: Boolean) {
-        val msgId = if(isConnected) R.string.connecten else R.string.no_internet
+        if (networkState == isConnected) return
+        networkState = isConnected
 
+        val msgRes = if (isConnected) R.string.connected else R.string.no_internet
         Snackbar.make(
             findViewById<View>(android.R.id.content),
-            msgId, Snackbar.LENGTH_LONG
+            msgRes, Snackbar.LENGTH_LONG
         ).show()
     }
 }

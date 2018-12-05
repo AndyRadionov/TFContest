@@ -6,6 +6,7 @@ import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.BaseAdapter
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -15,6 +16,7 @@ import com.hookedonplay.decoviewlib.events.DecoEvent
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.Task
+import com.radionov.tfcontests.ui.common.BaseActivity
 import com.radionov.tfcontests.ui.contest.ContestFragmentDialog
 import com.radionov.tfcontests.ui.main.adapter.TasksAdapter
 import com.radionov.tfcontests.ui.profile.ProfileActivity
@@ -24,7 +26,7 @@ import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : MvpAppCompatActivity(), MainView {
+class MainActivity : BaseActivity(), MainView {
 
     @Inject
     @InjectPresenter

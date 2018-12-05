@@ -14,6 +14,7 @@ import com.radionov.tfcontests.BuildConfig
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.User
+import com.radionov.tfcontests.ui.common.BaseActivity
 import com.radionov.tfcontests.utils.formatBirthday
 import com.radionov.tfcontests.utils.getName
 import com.radionov.tfcontests.utils.setName
@@ -28,7 +29,7 @@ import javax.inject.Inject
 private const val CURRENT_USER_KEY = "current_user"
 private const val BUTTONS_STATE_KEY = "buttons_state"
 
-class ProfileActivity : MvpAppCompatActivity(), ProfileView {
+class ProfileActivity : BaseActivity(), ProfileView {
 
     @Inject
     @InjectPresenter
@@ -59,10 +60,10 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
+    override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean(BUTTONS_STATE_KEY, buttonsState)
-        outState.putParcelable(BUTTONS_STATE_KEY, currentUser)
+        outState?.putBoolean(BUTTONS_STATE_KEY, buttonsState)
+        outState?.putParcelable(BUTTONS_STATE_KEY, currentUser)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
