@@ -75,6 +75,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showTasks(tasks: List<Task>, done: Int, points: Float) {
+        swipe_container.isRefreshing = false
 
         tv_progress.text = getString(R.string.tests_progress, done, tasks.size)
         tv_tests.text = tasks.size.toString()
@@ -103,6 +104,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showError(errorResource: Int) {
+        swipe_container.isRefreshing = false
         Toasty.error(this@MainActivity, getString(errorResource), Toast.LENGTH_SHORT).show()
     }
 
@@ -130,6 +132,8 @@ class MainActivity : BaseActivity(), MainView {
         tasks_container.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         tasks_container.adapter = tasksAdapter
 
+        swipe_container.setOnRefreshListener { presenter.getHomeWorks() }
+        swipe_container.isRefreshing = true
         presenter.getHomeWorks()
     }
 

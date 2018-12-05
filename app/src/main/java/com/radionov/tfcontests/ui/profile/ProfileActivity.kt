@@ -55,6 +55,7 @@ class ProfileActivity : BaseActivity(), ProfileView {
         if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_USER_KEY)) {
             currentUser = savedInstanceState.getParcelable(CURRENT_USER_KEY) as User
             changeButtonsState(savedInstanceState.getBoolean(BUTTONS_STATE_KEY))
+            showProfile(currentUser)
         } else {
             presenter.getProfile()
         }
@@ -114,6 +115,7 @@ class ProfileActivity : BaseActivity(), ProfileView {
     }
 
     private fun init() {
+        swipe_container.isRefreshing = true
         swipe_container.setOnRefreshListener { presenter.fetchUpdate() }
         btn_save.setOnClickListener {
             val name = et_name.text.toString()
