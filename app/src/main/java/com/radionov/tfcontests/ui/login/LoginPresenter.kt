@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.interactors.AuthInteractor
+import com.radionov.tfcontests.ui.common.BasePresenter
 import com.radionov.tfcontests.utils.RxComposers
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -14,10 +15,8 @@ import javax.inject.Inject
 @InjectViewState
 class LoginPresenter @Inject constructor(
     private val authInteractor: AuthInteractor,
-    private val rxComposers: RxComposers
-) : MvpPresenter<LoginView>() {
-
-    var disposable: Disposable? = null
+    rxComposers: RxComposers
+) : BasePresenter<LoginView>(rxComposers) {
 
     fun login(email: String, pass: String) {
         if (authInteractor.checkLogin()) {
@@ -25,8 +24,7 @@ class LoginPresenter @Inject constructor(
             return
         }
 
-        disposable?.dispose()
-
+        dispose()
         disposable = authInteractor.login(email, pass)
             .compose(rxComposers.getSingleComposer())
             .subscribe({ login ->
@@ -41,8 +39,7 @@ class LoginPresenter @Inject constructor(
     }
 
     fun restorePass(email: String) {
-        disposable?.dispose()
-
+        dispose()
         disposable = authInteractor.restorePass(email)
             .compose(rxComposers.getCompletableComposer())
             .subscribe({

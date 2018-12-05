@@ -28,17 +28,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     @Inject
     @InjectPresenter
-    lateinit var mainPresenter: MainPresenter
+    lateinit var presenter: MainPresenter
 
     @ProvidePresenter
-    fun providePresenter() = mainPresenter
+    fun providePresenter() = presenter
 
     private lateinit var tasksAdapter: TasksAdapter
     private var chartTestsIndex = 0
 
     private val clickListener = object : TasksAdapter.OnItemClickListener {
         override fun onClick(task: Task) {
-            mainPresenter.getContest(task)
+            presenter.getContest(task)
         }
     }
 
@@ -128,7 +128,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         tasks_container.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         tasks_container.adapter = tasksAdapter
 
-        mainPresenter.getHomeWorks()
+        presenter.getHomeWorks()
     }
 
     companion object {

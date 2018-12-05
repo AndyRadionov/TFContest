@@ -5,8 +5,6 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.widget.EditText
 
-
-
 /**
  * @author Andrey Radionov
  */

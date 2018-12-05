@@ -18,10 +18,10 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     @Inject
     @InjectPresenter
-    lateinit var loginPresenter: LoginPresenter
+    lateinit var presenter: LoginPresenter
 
     @ProvidePresenter
-    fun providePresenter() = loginPresenter
+    fun providePresenter() = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ContestApp.appComponent.inject(this)
@@ -52,10 +52,9 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
             val email = email_input.text.toString()
             setProgressView(View.VISIBLE, View.INVISIBLE, false)
             if (isLoginState()) {
-                loginPresenter
-                    .login(email, pass_input.text.toString())
+                presenter.login(email, pass_input.text.toString())
             } else {
-                loginPresenter.restorePass(email)
+                presenter.restorePass(email)
             }
         }
 

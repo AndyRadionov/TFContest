@@ -8,7 +8,6 @@ import java.util.*
  */
 private val BIRTHDAY_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
 
-
 fun formatBirthday(birthday: Date): String? {
     return BIRTHDAY_FORMAT.format(birthday)
 }

@@ -1,13 +1,12 @@
 package com.radionov.tfcontests.ui.main
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.interactors.ContestInteractor
+import com.radionov.tfcontests.ui.common.BasePresenter
 import com.radionov.tfcontests.utils.RxComposers
 import com.radionov.tfcontests.utils.TaskStatuses
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
@@ -16,14 +15,11 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(
     private val contestInteractor: ContestInteractor,
-    private val rxComposers: RxComposers
-) : MvpPresenter<MainView>() {
-
-    private var disposable: Disposable? = null
+    rxComposers: RxComposers
+) : BasePresenter<MainView>(rxComposers) {
 
     fun getHomeWorks() {
-        disposable?.dispose()
-
+        dispose()
         disposable = contestInteractor.getHomeWorks()
             .map { tasks ->
                 if (tasks.isNotEmpty()) {

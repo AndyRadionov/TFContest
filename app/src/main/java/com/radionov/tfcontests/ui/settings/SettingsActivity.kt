@@ -1,7 +1,6 @@
 package com.radionov.tfcontests.ui.settings
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -11,7 +10,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.ui.login.LoginActivity
-import com.radionov.tfcontests.ui.main.MainPresenter
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_settings.*
 import javax.inject.Inject
@@ -20,10 +18,10 @@ class SettingsActivity : MvpAppCompatActivity(), SettingsView {
 
     @Inject
     @InjectPresenter
-    lateinit var settingsPresenter: SettingsPresenter
+    lateinit var presenter: SettingsPresenter
 
     @ProvidePresenter
-    fun providePresenter() = settingsPresenter
+    fun providePresenter() = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ContestApp.appComponent.inject(this)
@@ -32,7 +30,7 @@ class SettingsActivity : MvpAppCompatActivity(), SettingsView {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        btn_logout.setOnClickListener { settingsPresenter.logout() }
+        btn_logout.setOnClickListener { presenter.logout() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

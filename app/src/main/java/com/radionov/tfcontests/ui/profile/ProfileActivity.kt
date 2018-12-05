@@ -14,7 +14,6 @@ import com.radionov.tfcontests.BuildConfig
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.User
-import com.radionov.tfcontests.utils.InputValidator
 import com.radionov.tfcontests.utils.formatBirthday
 import com.radionov.tfcontests.utils.getName
 import com.radionov.tfcontests.utils.setName
@@ -33,25 +32,15 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
 
     @Inject
     @InjectPresenter
-    lateinit var profilePresenter: ProfilePresenter
+    lateinit var presenter: ProfilePresenter
 
     @ProvidePresenter
-    fun providePresenter() = profilePresenter
+    fun providePresenter() = presenter
 
     private lateinit var currentUser: User
     private var buttonsState: Boolean = false
 
-    private val textWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            changeButtonsState(true)
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-        }
-    }
+    private val textWatcher = initTextWatcher()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ContestApp.appComponent.inject(this)
@@ -66,7 +55,7 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
             currentUser = savedInstanceState.getParcelable(CURRENT_USER_KEY) as User
             changeButtonsState(savedInstanceState.getBoolean(BUTTONS_STATE_KEY))
         } else {
-            profilePresenter.getProfile()
+            presenter.getProfile()
         }
     }
 
@@ -115,7 +104,7 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
     override fun onNameInput() {
         name_layout.error = ""
         parseUserData()
-        profilePresenter.updateProfile(currentUser)
+        presenter.updateProfile(currentUser)
         changeButtonsState()
     }
 
@@ -124,13 +113,13 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
     }
 
     private fun init() {
-        swipe_container.setOnRefreshListener { profilePresenter.fetchUpdate() }
+        swipe_container.setOnRefreshListener { presenter.fetchUpdate() }
         btn_save.setOnClickListener {
             val name = et_name.text.toString()
-            profilePresenter.isNameValid(name)
+            presenter.isNameValid(name)
         }
         btn_cancel.setOnClickListener {
-            profilePresenter.getProfile()
+            presenter.getProfile()
             changeButtonsState()
         }
         et_name.addTextChangedListener(textWatcher)
@@ -198,7 +187,20 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
             btn_cancel_year.setOnClickListener { dismiss() }
             show()
         }
+    }
 
+    private fun initTextWatcher(): TextWatcher {
+        return object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                changeButtonsState(true)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        }
     }
 
     companion object {

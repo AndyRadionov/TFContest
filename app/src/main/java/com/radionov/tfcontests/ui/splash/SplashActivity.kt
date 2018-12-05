@@ -4,32 +4,31 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.radionov.tfcontests.R
 import com.radionov.tfcontests.ContestApp
+import com.radionov.tfcontests.R
+import com.radionov.tfcontests.ui.common.BaseActivity
 import com.radionov.tfcontests.ui.login.LoginActivity
 import com.radionov.tfcontests.ui.main.MainActivity
 import javax.inject.Inject
 
-
-class SplashActivity : MvpAppCompatActivity(), SplashView {
+class SplashActivity : BaseActivity(), SplashView {
 
     @Inject
     @InjectPresenter
-    lateinit var splashPresenter: SplashPresenter
+    lateinit var presenter: SplashPresenter
     private var timeoutHandler: Handler? = null
 
     @ProvidePresenter
-    fun providePresenter() = splashPresenter
+    fun providePresenter() = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ContestApp.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        splashPresenter.checkLogin()
+        presenter.checkLogin()
     }
 
     override fun openLoginScreen() {

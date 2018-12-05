@@ -1,6 +1,7 @@
 package com.radionov.tfcontests.di
 
 import android.app.Application
+import com.radionov.tfcontests.ui.common.BaseActivity
 import com.radionov.tfcontests.ui.contest.ContestFragmentDialog
 import com.radionov.tfcontests.ui.login.LoginActivity
 import com.radionov.tfcontests.ui.main.MainActivity
@@ -32,4 +33,5 @@ interface AppComponent {
     fun inject(profileActivity: ProfileActivity)
     fun inject(settingsActivity: SettingsActivity)
     fun inject(contestFragmentDialog: ContestFragmentDialog)
+    fun inject(baseActivity: BaseActivity)
 }

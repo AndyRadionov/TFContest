@@ -1,14 +1,13 @@
 package com.radionov.tfcontests.ui.profile
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.User
 import com.radionov.tfcontests.data.entities.UserWithStatus
 import com.radionov.tfcontests.interactors.UserInteractor
+import com.radionov.tfcontests.ui.common.BasePresenter
 import com.radionov.tfcontests.utils.InputValidator
 import com.radionov.tfcontests.utils.RxComposers
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
@@ -17,13 +16,11 @@ import javax.inject.Inject
 @InjectViewState
 class ProfilePresenter @Inject constructor(
     private val userInteractor: UserInteractor,
-    private val rxComposers: RxComposers
-) : MvpPresenter<ProfileView>() {
-
-    private var disposable: Disposable? = null
+    rxComposers: RxComposers
+) : BasePresenter<ProfileView>(rxComposers) {
 
     fun getProfile() {
-        disposable?.dispose()
+        dispose()
         disposable = userInteractor.getStoredUser()
             .compose(rxComposers.getSingleComposer())
             .subscribe({ user ->
@@ -34,7 +31,7 @@ class ProfilePresenter @Inject constructor(
     }
 
     fun fetchUpdate() {
-        disposable?.dispose()
+        dispose()
         disposable = userInteractor.fetchUpdate()
             .compose(rxComposers.getSingleComposer())
             .subscribe({ user ->
@@ -45,7 +42,7 @@ class ProfilePresenter @Inject constructor(
     }
 
     fun updateProfile(user: User) {
-        disposable?.dispose()
+        dispose()
         disposable = userInteractor.updateUser(UserWithStatus(user))
             .compose(rxComposers.getCompletableComposer())
             .subscribe({
