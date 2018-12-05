@@ -173,6 +173,20 @@
             app:layout_constraintTop_toBottomOf="@id/tests_divider"
             tools:text="@string/all_tests" />
 
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="@string/error_tests_not_found"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/text_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_tests_all"
+            android:id="@+id/tv_empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/tasks_container"
             android:layout_width="match_parent"

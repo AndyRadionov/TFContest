@@ -32,8 +32,8 @@ class MainPresenter @Inject constructor(
                     })
                 }
                 val doneAndPoints = tasks.fold(0 to 0F) { doneAndPoints, task ->
-                    val done =
-                        doneAndPoints.first + if (TaskStatuses.valueOf(task.status.toUpperCase()) == TaskStatuses.ACCEPTED) 1 else 0
+                    val done = doneAndPoints.first +
+                            if (TaskStatuses.valueOf(task.status.toUpperCase()) == TaskStatuses.ACCEPTED) 1 else 0
                     val points = doneAndPoints.second + task.mark.toFloat()
                     return@fold done to points
                 }

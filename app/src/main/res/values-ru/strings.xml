@@ -42,4 +42,5 @@
     <string name="pass_hint">ПАРОЛЬ</string>
     <string name="no_internet">Интернет соединение отсутствует</string>
     <string name="connected">Интернет соединение утсановлено</string>
+    <string name="empty_text">Тесты не найдены</string>
 </resources>

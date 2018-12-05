@@ -6,9 +6,8 @@ import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.BaseAdapter
+import android.view.View
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.hookedonplay.decoviewlib.charts.SeriesItem
@@ -75,6 +74,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showTasks(tasks: List<Task>, done: Int, points: Float) {
+        tv_empty_view.visibility = View.INVISIBLE
         swipe_container.isRefreshing = false
 
         tv_progress.text = getString(R.string.tests_progress, done, tasks.size)
