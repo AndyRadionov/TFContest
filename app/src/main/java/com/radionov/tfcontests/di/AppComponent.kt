@@ -27,11 +27,11 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
+    fun inject(baseActivity: BaseActivity)
     fun inject(splashActivity: SplashActivity)
     fun inject(loginActivity: LoginActivity)
     fun inject(mainActivity: MainActivity)
     fun inject(profileActivity: ProfileActivity)
     fun inject(settingsActivity: SettingsActivity)
     fun inject(contestFragmentDialog: ContestFragmentDialog)
-    fun inject(baseActivity: BaseActivity)
 }

@@ -118,14 +118,14 @@ class MainActivity : BaseActivity(), MainView {
                 .setRange(0f, FULL_CHART, FULL_CHART)
                 .setLineWidth(CHART_LINE_WIDTH)
                 .build()
-        );
+        )
 
         val chartTestsSeries = SeriesItem.Builder(ResourcesCompat.getColor(resources, R.color.test_bg, null))
             .setInitialVisibility(false)
             .setLineWidth(CHART_LINE_WIDTH)
             .build()
 
-        chartTestsIndex = tests_chart.addSeries(chartTestsSeries);
+        chartTestsIndex = tests_chart.addSeries(chartTestsSeries)
 
         tasksAdapter = TasksAdapter(clickListener)
 

@@ -36,12 +36,13 @@ class SettingsActivity : BaseActivity(), SettingsView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
+            return true
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onLogoutFail() {
-        Toasty.error(this, "Logout Fail", Toast.LENGTH_SHORT).show()
+        Toasty.error(this, getString(R.string.logout_error), Toast.LENGTH_SHORT).show()
     }
 
     override fun onLogout() {

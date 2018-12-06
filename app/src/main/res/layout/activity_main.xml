@@ -5,7 +5,8 @@
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.main.MainActivity"
+    tools:ignore="RtlHardcoded, SmallSp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

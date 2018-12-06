@@ -36,6 +36,7 @@
     <string name="logout">Выйти</string>
     <string name="change_user">Сменить пользователя</string>
     <string name="settings">Настройки</string>
+    <string name="logout_error">Не удалось выйти</string>
 
     //MyCourse Main Screen
     <string name="my_course">Мой курс</string>
@@ -45,7 +46,6 @@
     <string name="tests_title">Тестов</string>
     <string name="done">Пройдено</string>
     <string name="points_title">Балла</string>
-    <string name="empty_text">Тесты не найдены</string>
     <string name="success_test_pass">Тест успешно сдан</string>
     <string name="error_test_failed">Тест не сдавался</string>
     <string name="error_test_announce">Тест не начался</string>

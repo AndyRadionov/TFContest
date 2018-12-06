@@ -11,7 +11,7 @@ class NetworkManager(private val context: Context) {
 
     fun isInternetAvailable(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
-                as ConnectivityManager
+                as ConnectivityManager?
 
         return connectivityManager?.let {
             with(connectivityManager) {
@@ -19,6 +19,6 @@ class NetworkManager(private val context: Context) {
                         && activeNetworkInfo.isAvailable
                         && activeNetworkInfo.isConnected
             }
-        }
+        } ?: false
     }
 }

@@ -83,7 +83,7 @@ class NetworkModule {
         }
     }
 
-    fun OkHttpClient.Builder.setCookieStore(prefs: Prefs): OkHttpClient.Builder {
+    private fun OkHttpClient.Builder.setCookieStore(prefs: Prefs): OkHttpClient.Builder {
         return this
             .addInterceptor(initSendCookiesInterceptor(prefs))
             .addInterceptor(initSaveCookiesInterceptor(prefs))

@@ -21,7 +21,7 @@ class MainPresenter @Inject constructor(
         disposable = contestInteractor.getHomeWorks()
             .map { tasks ->
                 if (tasks.isNotEmpty()) {
-                    tasks.sortWith(Comparator<Task> { o1, o2 ->
+                    tasks.sortWith(Comparator { o1, o2 ->
                         if (o1.status == o2.status) return@Comparator 0
 
                         val status1 = TaskStatuses.valueOf(o1.task.contestInfo.contestStatus.status.toUpperCase())
@@ -50,7 +50,6 @@ class MainPresenter @Inject constructor(
 
     fun getContest(task: Task) {
         if (!checkTask(task)) return
-
         viewState.openContest(task.task.contestInfo.contestUrl)
     }
 

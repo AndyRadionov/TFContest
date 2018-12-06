@@ -4,7 +4,6 @@ import com.radionov.tfcontests.data.entities.*
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**

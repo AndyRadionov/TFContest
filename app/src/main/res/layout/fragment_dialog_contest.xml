@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.contest.ContestFragmentDialog">
+    tools:context=".ui.contest.ContestFragmentDialog"
+    tools:ignore="ContentDescription,RtlHardcoded">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,7 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:ignore="RelativeOverlap">
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -28,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:maxLength="20"
                 android:layout_toRightOf="@id/iv_back"
                 android:fontFamily="sans-serif-medium"
                 tools:text="Test"

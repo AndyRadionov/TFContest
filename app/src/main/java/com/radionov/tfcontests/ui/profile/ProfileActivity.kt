@@ -14,6 +14,7 @@ import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.User
 import com.radionov.tfcontests.ui.common.BaseActivity
+import com.radionov.tfcontests.utils.EMPTY_STRING
 import com.radionov.tfcontests.utils.formatBirthday
 import com.radionov.tfcontests.utils.getName
 import com.radionov.tfcontests.utils.setName
@@ -23,10 +24,6 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.dialog_year_picker.*
 import java.util.*
 import javax.inject.Inject
-
-
-private const val CURRENT_USER_KEY = "current_user"
-private const val BUTTONS_STATE_KEY = "buttons_state"
 
 class ProfileActivity : BaseActivity(), ProfileView {
 
@@ -46,8 +43,8 @@ class ProfileActivity : BaseActivity(), ProfileView {
         ContestApp.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         init()
         initDatePickers()
 
@@ -69,6 +66,7 @@ class ProfileActivity : BaseActivity(), ProfileView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
+            return true
         }
         return super.onOptionsItemSelected(item)
     }
@@ -103,7 +101,7 @@ class ProfileActivity : BaseActivity(), ProfileView {
     }
 
     override fun onNameInput() {
-        name_layout.error = ""
+        name_layout.error = EMPTY_STRING
         parseUserData()
         presenter.updateProfile(currentUser)
         changeButtonsState()
@@ -206,6 +204,8 @@ class ProfileActivity : BaseActivity(), ProfileView {
     }
 
     companion object {
+        private const val CURRENT_USER_KEY = "current_user"
+        private const val BUTTONS_STATE_KEY = "buttons_state"
         private const val MIN_BIRTH_YEAR = 1950L
         private const val MIN_GRADE_YEAR = 1970
         private const val MAX_GRADE_STEP = 10

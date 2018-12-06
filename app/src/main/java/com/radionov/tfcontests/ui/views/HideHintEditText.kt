@@ -2,13 +2,13 @@ package com.radionov.tfcontests.ui.views
 
 import android.content.Context
 import android.graphics.Rect
+import android.support.v7.widget.AppCompatEditText
 import android.util.AttributeSet
-import android.widget.EditText
 
 /**
  * @author Andrey Radionov
  */
-class HideHintEditText : EditText {
+class HideHintEditText : AppCompatEditText {
 
     private val initialHint: CharSequence
 

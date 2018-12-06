@@ -4,8 +4,6 @@ import com.arellomobile.mvp.InjectViewState
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.interactors.AuthInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
-import com.radionov.tfcontests.utils.NetworkManager
-import com.radionov.tfcontests.utils.RxComposers
 import javax.inject.Inject
 
 /**

@@ -7,8 +7,6 @@ import com.radionov.tfcontests.data.entities.UserWithStatus
 import com.radionov.tfcontests.interactors.UserInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
 import com.radionov.tfcontests.utils.InputValidator
-import com.radionov.tfcontests.utils.NetworkManager
-import com.radionov.tfcontests.utils.RxComposers
 import javax.inject.Inject
 
 /**
@@ -54,7 +52,7 @@ class ProfilePresenter @Inject constructor(
 
     fun isNameValid(name: String) {
         when {
-            InputValidator.isNameNotRus(name) -> viewState.onNameInputFail(R.string.name_full_error)
+            InputValidator.isNameNotRus(name) -> viewState.onNameInputFail(R.string.name_rus_error)
             InputValidator.isNameNotFull(name) -> viewState.onNameInputFail(R.string.name_full_error)
             else -> viewState.onNameInput()
         }

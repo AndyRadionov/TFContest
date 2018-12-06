@@ -99,7 +99,7 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
 
     private fun init() {
         iv_back.setOnClickListener {
-            //todo presenter.submit last question?
+            //todo prevQuestion. If no, presenter.submit last question?
             dismiss()
         }
     }
