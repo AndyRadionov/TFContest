@@ -1,7 +1,6 @@
 package com.radionov.tfcontests
 
 import android.app.Application
-import com.facebook.stetho.Stetho
 import com.radionov.tfcontests.di.AppComponent
 import com.radionov.tfcontests.di.DaggerAppComponent
 

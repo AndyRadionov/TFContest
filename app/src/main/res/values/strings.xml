@@ -43,7 +43,7 @@
     <string name="error_load_test">Не удалось загрузить тест</string>
     <string name="login_hint">ЛОГИН</string>
     <string name="pass_hint">ПАРОЛЬ</string>
-    <string name="no_internet">Bнтернет соединение отсутствует</string>
+    <string name="no_internet">Интернет соединение отсутствует</string>
     <string name="connected">Интернет соединение утсановлено</string>
     <string name="empty_text">Тесты не найдены</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.radionov.tfcontests.ui.contest
 
-
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -85,6 +84,12 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
         showQuestion()
     }
 
+    override fun showNotConnected() {
+        context?.let {
+            Toasty.error(it, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun showQuestion() {
         val problem = contestProblems[currentQuestion]
         tv_question.text = problem.problem.cmsPage.statement
@@ -94,13 +99,13 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
 
     private fun init() {
         iv_back.setOnClickListener {
-            //todo presenter.stopQuiz
+            //todo presenter.submit last question?
             dismiss()
         }
     }
 
     companion object {
-        val TAG = ContestFragmentDialog::class.java.simpleName
+        val TAG: String = ContestFragmentDialog::class.java.simpleName
         @JvmStatic
         fun newInstance(contestUrl: String) =
                 ContestFragmentDialog().apply {

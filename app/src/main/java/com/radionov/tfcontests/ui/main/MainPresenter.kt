@@ -5,7 +5,6 @@ import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.Task
 import com.radionov.tfcontests.interactors.ContestInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
-import com.radionov.tfcontests.utils.RxComposers
 import com.radionov.tfcontests.utils.TaskStatuses
 import javax.inject.Inject
 
@@ -14,12 +13,11 @@ import javax.inject.Inject
  */
 @InjectViewState
 class MainPresenter @Inject constructor(
-    private val contestInteractor: ContestInteractor,
-    rxComposers: RxComposers
-) : BasePresenter<MainView>(rxComposers) {
+    private val contestInteractor: ContestInteractor
+) : BasePresenter<MainView>() {
 
     fun getHomeWorks() {
-        dispose()
+        if (isNotConnected()) return
         disposable = contestInteractor.getHomeWorks()
             .map { tasks ->
                 if (tasks.isNotEmpty()) {
@@ -51,9 +49,7 @@ class MainPresenter @Inject constructor(
     }
 
     fun getContest(task: Task) {
-        if (!checkTask(task)) {
-            return
-        }
+        if (!checkTask(task)) return
 
         viewState.openContest(task.task.contestInfo.contestUrl)
     }

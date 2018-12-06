@@ -1,8 +1,10 @@
 package com.radionov.tfcontests.di
 
+import android.app.Application
 import com.radionov.tfcontests.BuildConfig
 import com.radionov.tfcontests.data.datasource.local.Prefs
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
+import com.radionov.tfcontests.utils.NetworkManager
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -18,6 +20,11 @@ import javax.inject.Singleton
  */
 @Module
 class NetworkModule {
+
+    @Provides
+    @Singleton
+    fun provideNetworkManager(app: Application): NetworkManager =
+        NetworkManager(app.applicationContext)
 
     @Provides
     @Singleton

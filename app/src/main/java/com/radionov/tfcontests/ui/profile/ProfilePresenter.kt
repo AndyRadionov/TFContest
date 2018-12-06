@@ -7,6 +7,7 @@ import com.radionov.tfcontests.data.entities.UserWithStatus
 import com.radionov.tfcontests.interactors.UserInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
 import com.radionov.tfcontests.utils.InputValidator
+import com.radionov.tfcontests.utils.NetworkManager
 import com.radionov.tfcontests.utils.RxComposers
 import javax.inject.Inject
 
@@ -15,12 +16,11 @@ import javax.inject.Inject
  */
 @InjectViewState
 class ProfilePresenter @Inject constructor(
-    private val userInteractor: UserInteractor,
-    rxComposers: RxComposers
-) : BasePresenter<ProfileView>(rxComposers) {
+    private val userInteractor: UserInteractor
+) : BasePresenter<ProfileView>() {
 
     fun getProfile() {
-        dispose()
+        if (isNotConnected()) return
         disposable = userInteractor.getStoredUser()
             .compose(rxComposers.getSingleComposer())
             .subscribe({ user ->
@@ -31,7 +31,7 @@ class ProfilePresenter @Inject constructor(
     }
 
     fun fetchUpdate() {
-        dispose()
+        if (isNotConnected()) return
         disposable = userInteractor.fetchUpdate()
             .compose(rxComposers.getSingleComposer())
             .subscribe({ user ->
@@ -42,7 +42,7 @@ class ProfilePresenter @Inject constructor(
     }
 
     fun updateProfile(user: User) {
-        dispose()
+        if (isNotConnected()) return
         disposable = userInteractor.updateUser(UserWithStatus(user))
             .compose(rxComposers.getCompletableComposer())
             .subscribe({
