@@ -32,12 +32,15 @@ class NetworkModule {
             .create(FintechApi::class.java)
 
     private fun initOkHttpClient(prefs: Prefs): OkHttpClient {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder()
+        val httpClient = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            val logging = HttpLoggingInterceptor()
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            httpClient.addInterceptor(logging)
+        }
+        return httpClient
             .setCookieStore(prefs)
             .addInterceptor(StethoInterceptor())
-            .addInterceptor(httpLoggingInterceptor)
             .build()
     }
 

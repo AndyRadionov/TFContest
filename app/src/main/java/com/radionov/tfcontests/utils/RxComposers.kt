@@ -1,6 +1,9 @@
 package com.radionov.tfcontests.utils
 
-import io.reactivex.*
+import io.reactivex.CompletableTransformer
+import io.reactivex.ObservableTransformer
+import io.reactivex.Scheduler
+import io.reactivex.SingleTransformer
 
 /**
  * @author Andrey Radionov

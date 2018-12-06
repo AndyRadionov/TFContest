@@ -3,9 +3,7 @@ package com.radionov.tfcontests.ui.settings
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.BaseAdapter
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.radionov.tfcontests.ContestApp

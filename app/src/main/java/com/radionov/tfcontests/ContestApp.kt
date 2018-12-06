@@ -16,7 +16,6 @@ class ContestApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Stetho.initializeWithDefaults(this)
         appComponent = DaggerAppComponent
             .builder()
             .app(this)

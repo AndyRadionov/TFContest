@@ -1,12 +1,10 @@
 package com.radionov.tfcontests.ui.login
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.interactors.AuthInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
 import com.radionov.tfcontests.utils.RxComposers
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 /**
