@@ -1,18 +1,22 @@
 <resources>
     <string name="app_name" translatable="false">TFContest</string>
 
+    //Common
+    <string name="no_internet">No Internet connection</string>
+    <string name="connected">Internet connection established</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="cancel">Cancel</string>
+
+    //Login Screen
     <string name="login">Login</string>
     <string name="restore_pass">Restore password</string>
     <string name="error_login">Wrong email / password</string>
     <string name="error_restore">Email not found</string>
     <string name="restore_sent">Instruction sent to\n%s</string>
+
+    //Profile Screen
     <string name="profile">Profile</string>
-    <string name="action_settings">Settings</string>
-    <string name="logout">Logout</string>
-    <string name="change_user">Change user</string>
-    <string name="settings">Settings</string>
     <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
     <string name="grade_year">Graduation year</string>
     <string name="university">University</string>
     <string name="education">Education</string>
@@ -21,29 +25,33 @@
     <string name="contacts">Contact information</string>
     <string name="birthday">Birthday</string>
     <string name="name">Full name</string>
-    <string name="my_course">My course</string>
-    <string name="name_rus_error">Enter name in russian</string>
-    <string name="name_full_error">Enter first and last names</string>
-    <string name="all_tests">ALL %d</string>
-    <string name="all_tests_placeholder">ALL 0</string>
-    <string name="ok" translatable="false">OK</string>
+    <string name="login_hint">LOGIN</string>
+    <string name="pass_hint">PASSWORD</string>
     <string name="profile_updated">Profile updated</string>
     <string name="error_update_profile">Can\'t update profile</string>
-    <string name="test_tasks">Test tasks</string>
+    <string name="name_rus_error">Enter name in russian</string>
+    <string name="name_full_error">Enter first and last names</string>
+
+    //Settings Screen
+    <string name="action_settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="change_user">Change user</string>
+    <string name="settings">Settings</string>
+
+    //MyCourse Main Screen
     <string name="tests_progress" translatable="false">%d/%d</string>
     <string name="tests_percent" translatable="false">%d%%</string>
-    <string name="tests_title">Тестов</string>
-    <string name="done">Пройдено</string>
-    <string name="points_title">Балла</string>
-    <string name="error_test_failed">Тест не сдавался</string>
-    <string name="sucess_test_pass">Тест успешно сдан</string>
-    <string name="error_test_announce">Тест не начался</string>
-    <string name="error_tests_not_found">Доступные тесты не найдены</string>
-    <string name="network_problems">Проблемы с сетью</string>
-    <string name="error_load_test">Не удалось загрузить тест</string>
-    <string name="login_hint">ЛОГИН</string>
-    <string name="pass_hint">ПАРОЛЬ</string>
-    <string name="no_internet">Интернет соединение отсутствует</string>
-    <string name="connected">Интернет соединение утсановлено</string>
-    <string name="empty_text">Тесты не найдены</string>
+    <string name="my_course">My course</string>
+    <string name="all_tests">ALL %d</string>
+    <string name="all_tests_placeholder">ALL 0</string>
+    <string name="test_tasks">Test tasks</string>
+    <string name="tests_title">Tests</string>
+    <string name="done">Done</string>
+    <string name="points_title">Points</string>
+    <string name="empty_text">Tests not found</string>
+    <string name="success_test_pass">Test passed successfully</string>
+    <string name="error_test_failed">Test isn\'t passed</string>
+    <string name="error_test_announce">Test has not opened yet</string>
+    <string name="error_tests_not_found">No available tests found</string>
+    <string name="error_load_test">Could not load test</string>
 </resources>

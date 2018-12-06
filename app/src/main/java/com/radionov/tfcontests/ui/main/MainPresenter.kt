@@ -64,7 +64,7 @@ class MainPresenter @Inject constructor(
         }
         when (task.status) {
             TaskStatuses.FAILED.title -> viewState.showError(R.string.error_test_failed)
-            TaskStatuses.ACCEPTED.title -> viewState.showSuccess(R.string.sucess_test_pass)
+            TaskStatuses.ACCEPTED.title -> viewState.showSuccess(R.string.success_test_pass)
         }
         return false
     }
