@@ -1,6 +1,5 @@
 package com.radionov.tfcontests.di
 
-import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.radionov.tfcontests.BuildConfig
 import com.radionov.tfcontests.data.datasource.local.Prefs
 import com.radionov.tfcontests.data.datasource.remote.FintechApi
@@ -40,7 +39,6 @@ class NetworkModule {
         }
         return httpClient
             .setCookieStore(prefs)
-            .addInterceptor(StethoInterceptor())
             .build()
     }
 
