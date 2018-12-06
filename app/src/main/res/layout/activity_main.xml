@@ -15,30 +15,21 @@
 
         <TextView
             android:id="@+id/tv_progress_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            style="@style/GrayCourseTextStyle"
+            android:layout_marginTop="@dimen/double_margin"
             android:drawableRight="@drawable/tests_count_badge"
-            android:drawablePadding="4dp"
-            android:fontFamily="sans-serif"
+            android:drawablePadding="@dimen/tests_badge_padding"
             android:text="@string/tests_title"
-            android:textColor="#9299a2"
-            android:textSize="12sp"
-            android:textStyle="normal"
+            android:textSize="@dimen/small_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/tests_chart"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="-0.01"
-            android:textColor="#333333"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            style="@style/BoldCourseTextStyle"
+            android:layout_marginTop="@dimen/small_margin"
+            android:textSize="@dimen/big_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/tests_chart"
             app:layout_constraintTop_toBottomOf="@id/tv_progress_label"
@@ -46,13 +37,8 @@
 
         <TextView
             android:id="@+id/tv_tests_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="-0.01"
-            android:textColor="#333333"
-            android:textSize="32sp"
-            android:textStyle="bold"
+            style="@style/BoldCourseTextStyle"
+            android:textSize="@dimen/percent_text"
             app:layout_constraintBottom_toBottomOf="@id/tests_chart"
             app:layout_constraintLeft_toLeftOf="@id/tests_chart"
             app:layout_constraintRight_toRightOf="@id/tests_chart"
@@ -60,47 +46,34 @@
             tools:text="80%" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="-0.01"
+            style="@style/GrayCourseTextStyle"
             android:text="@string/done"
-            android:textColor="#9299a2"
-            android:textSize="10sp"
-            android:textStyle="normal"
+            android:textSize="@dimen/tiny_text"
             app:layout_constraintLeft_toLeftOf="@id/tests_chart"
             app:layout_constraintRight_toRightOf="@id/tests_chart"
             app:layout_constraintTop_toBottomOf="@id/tv_tests_percent" />
 
         <com.hookedonplay.decoviewlib.DecoView
             android:id="@+id/tests_chart"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="@dimen/chart_size"
+            android:layout_height="@dimen/chart_size"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_progress_label" />
 
         <TextView
             android:id="@+id/tv_points"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textColor="#333333"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            style="@style/BoldCourseTextStyle"
+            android:textSize="@dimen/big_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/vertical_divider"
             app:layout_constraintTop_toTopOf="@id/vertical_divider" />
 
         <TextView
             android:id="@+id/tv_points_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            style="@style/CourseTextStyle"
             android:text="@string/points_title"
-            android:textColor="#333333"
-            android:textSize="14sp"
-            android:textStyle="normal"
+            android:textSize="@dimen/label_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/vertical_divider"
             app:layout_constraintTop_toBottomOf="@id/tv_points" />
@@ -108,32 +81,24 @@
         <View
             android:id="@+id/vertical_divider"
             style="@style/VerticalDivider"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/double_margin"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tests_chart" />
 
         <TextView
             android:id="@+id/tv_tests"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textColor="#333333"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            style="@style/BoldCourseTextStyle"
+            android:textSize="@dimen/big_text"
             app:layout_constraintLeft_toRightOf="@id/vertical_divider"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/vertical_divider" />
 
         <TextView
             android:id="@+id/tv_tests_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            style="@style/CourseTextStyle"
             android:text="@string/tests_title"
-            android:textColor="#333333"
-            android:textSize="14sp"
-            android:textStyle="normal"
+            android:textSize="@dimen/label_text"
             app:layout_constraintLeft_toRightOf="@id/vertical_divider"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_tests" />
@@ -141,58 +106,50 @@
         <View
             android:id="@+id/tests_divider"
             style="@style/HorizontalDivider"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/regular_margin"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_points_label" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            style="@style/CourseTextStyle"
+            android:layout_margin="@dimen/double_margin"
             android:fontFamily="sans-serif-medium"
             android:lineSpacingExtra="5sp"
             android:text="@string/test_tasks"
-            android:textColor="#333333"
-            android:textSize="14sp"
-            android:textStyle="normal"
+            android:textSize="@dimen/label_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tests_divider" />
 
         <TextView
             android:id="@+id/tv_tests_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            style="@style/CourseTextStyle"
+            android:layout_margin="@dimen/double_margin"
             android:fontFamily="sans-serif-medium"
             android:lineSpacingExtra="5sp"
             android:text="@string/all_tests_placeholder"
-            android:textColor="#458bf6"
-            android:textSize="14sp"
-            android:textStyle="normal"
+            android:textColor="@color/tests_blue"
+            android:textSize="@dimen/label_text"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tests_divider"
             tools:text="@string/all_tests" />
 
         <TextView
+            android:id="@+id/tv_empty_view"
+            style="@style/CourseTextStyle"
+            android:layout_marginTop="@dimen/double_margin"
             android:gravity="center"
-            android:textSize="18sp"
             android:text="@string/error_tests_not_found"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/text_color"
+            android:textSize="@dimen/big_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_tests_all"
-            android:id="@+id/tv_empty_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:layout_constraintTop_toBottomOf="@id/tv_tests_all" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/tasks_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/double_margin"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_tests_all" />

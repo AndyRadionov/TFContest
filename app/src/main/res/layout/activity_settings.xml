@@ -4,29 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.settings.SettingsActivity">
+    tools:context=".ui.settings.SettingsActivity"
+    tools:ignore="RtlHardcoded">
 
     <Button
-        android:layout_margin="8dp"
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/regular_margin"
         android:background="@drawable/login_btn_bg"
         android:text="@string/logout"
         android:textColor="@color/text_color"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textSize="16sp"
         android:id="@+id/tv_signout"
-        android:layout_marginLeft="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/regular_margin"
         android:text="@string/change_user"
         android:textColor="@color/text_color"
-        app:layout_constraintTop_toTopOf="@id/btn_logout"
+        android:textSize="@dimen/regular_text"
         app:layout_constraintBottom_toBottomOf="@id/btn_logout"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_logout" />
 </android.support.constraint.ConstraintLayout>

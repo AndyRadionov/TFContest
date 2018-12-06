@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    //Sizes
     <dimen name="login_input_width">320dp</dimen>
     <dimen name="login_input_height">60dp</dimen>
-    <dimen name="login_big_margin">48dp</dimen>
-    <dimen name="login_input_size">14sp</dimen>
-    <dimen name="regular_margin">8dp</dimen>
-    <dimen name="progress_elevation">4dp</dimen>
+    <dimen name="avatar_border">0.5dp</dimen>
+    <dimen name="avatar_size">100dp</dimen>
+    <dimen name="avatar_radius">50dp</dimen>
+    <dimen name="double_margin">16dp</dimen>
+    <dimen name="year_btn_size">40dp</dimen>
+    <dimen name="chart_size">160dp</dimen>
+    <dimen name="ongoing_badge_size">20dp</dimen>
+    <dimen name="task_card_size">100dp</dimen>
+    <dimen name="btn_width">160dp</dimen>
+
+    //TextSizes
+    <dimen name="tiny_text">10sp</dimen>
     <dimen name="small_text">12sp</dimen>
+    <dimen name="login_input_size">14sp</dimen>
+    <dimen name="label_text">14sp</dimen>
+    <dimen name="regular_text">16sp</dimen>
+    <dimen name="big_text">18sp</dimen>
+    <dimen name="huge_text">21sp</dimen>
+    <dimen name="percent_text">32sp</dimen>
+
+    //Spacings
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="tests_badge_padding">4dp</dimen>
+    <dimen name="regular_elevation">4dp</dimen>
+    <dimen name="regular_margin">8dp</dimen>
+    <dimen name="profile_left_margin">24dp</dimen>
+    <dimen name="login_big_margin">48dp</dimen>
 </resources>

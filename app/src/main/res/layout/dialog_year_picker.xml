@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="@color/colorAccent"
-        android:padding="16dp"
+        android:padding="@dimen/double_margin"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/regular_text"
         android:textStyle="bold"
         tools:text="2018" />
 
@@ -36,13 +36,12 @@
 
     <Button
         android:id="@+id/btn_ok_year"
-        android:layout_width="40dp"
+        android:layout_width="@dimen/year_btn_size"
         android:layout_height="wrap_content"
         android:layout_below="@+id/year_picker"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="@dimen/double_margin"
         android:background="@null"
         android:text="@string/ok"
         android:textColor="@color/colorAccent" />
-
 </RelativeLayout>
