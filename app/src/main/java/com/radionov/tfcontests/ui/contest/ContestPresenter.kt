@@ -7,9 +7,10 @@ import com.radionov.tfcontests.data.entities.ContestResponse
 import com.radionov.tfcontests.data.entities.Problem
 import com.radionov.tfcontests.interactors.ContestInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
-import com.radionov.tfcontests.utils.RxComposers
 import io.reactivex.Single
+import io.reactivex.functions.Action
 import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 /**
@@ -29,7 +30,7 @@ class ContestPresenter @Inject constructor(
         ).compose(rxComposers.getSingleComposer())
             .subscribe({ (response, problems) ->
                 if (problems.isNotEmpty()) {
-                    viewState.showContest(response.contest.title, problems)
+                    viewState.showContest(response.contest, problems)
                 } else {
                     viewState.showError(R.string.error_load_test)
                 }
@@ -40,15 +41,19 @@ class ContestPresenter @Inject constructor(
         if (isNotConnected()) return
         disposable = contestInteractor.startContest(url)
             .compose(rxComposers.getCompletableComposer())
-            .subscribe()
-        //todo
+            .subscribe(
+                { viewState.onTestStart() },
+                { viewState.onTestStartFail() }
+            )
     }
 
     fun submitAnswer(url: String, questionId: Int, answer: Answer) {
         if (isNotConnected()) return
         disposable = contestInteractor.submitAnswer(url, questionId, answer)
             .compose(rxComposers.getSingleComposer())
-            .subscribe()
-        //todo
+            .subscribe(
+                { viewState.onAnswerSubmitted() },
+                { viewState.showError(R.string.error_submit_answer) }
+            )
     }
 }

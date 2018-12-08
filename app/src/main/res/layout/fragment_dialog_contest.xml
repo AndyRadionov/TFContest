@@ -52,6 +52,12 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
+    <ProgressBar
+        android:id="@+id/test_progress"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true" />
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,20 +103,20 @@
                 android:orientation="vertical" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:id="@+id/checkbox_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_question"
-                android:layout_marginLeft="16dp" />
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <RelativeLayout
-        android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal">
 
         <Button
             android:id="@+id/btn_finish"
@@ -121,6 +127,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/cancel_btn_bg"
             android:elevation="4dp"
+            android:enabled="false"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.03"
             android:text="@string/finish"
@@ -138,6 +145,7 @@
             android:layout_toRightOf="@id/btn_finish"
             android:background="@drawable/save_btn_bg"
             android:elevation="4dp"
+            android:enabled="false"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.03"
             android:text="@string/next"

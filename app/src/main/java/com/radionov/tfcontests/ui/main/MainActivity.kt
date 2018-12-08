@@ -81,13 +81,14 @@ class MainActivity : BaseActivity(), MainView {
         tv_tests.text = tasks.size.toString()
         tv_points.text = points.toString()
 
-        val donePercent = done.toFloat() / tasks.size * 100
+        val donePercent = done.toFloat() / tasks.size * FULL_CHART
         tv_tests_percent.text = getString(R.string.tests_percent, donePercent.toInt())
         tests_chart.addEvent(
             DecoEvent.Builder(donePercent)
                 .setDuration(CHART_ANIM_DURATION)
                 .setIndex(chartTestsIndex)
-                .build())
+                .build()
+        )
         tv_tests_all.text = getString(R.string.all_tests, tasks.size)
 
         val ongoingTask = tasks.firstOrNull { task ->
@@ -98,9 +99,14 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun openContest(contestUrl: String) {
-        ContestFragmentDialog
+        val contestDialog = ContestFragmentDialog
             .newInstance(contestUrl)
-            .show(supportFragmentManager, ContestFragmentDialog.TAG)
+        contestDialog.setOnDismissListener(object : ContestFragmentDialog.OnDismissListener {
+            override fun onDismiss() {
+                getHomeWorks()
+            }
+        })
+        contestDialog.show(supportFragmentManager, ContestFragmentDialog.TAG)
     }
 
     override fun showError(errorResource: Int) {
@@ -133,6 +139,10 @@ class MainActivity : BaseActivity(), MainView {
         tasks_container.adapter = tasksAdapter
 
         swipe_container.setOnRefreshListener { presenter.getHomeWorks() }
+        getHomeWorks()
+    }
+
+    private fun getHomeWorks() {
         swipe_container.isRefreshing = true
         presenter.getHomeWorks()
     }

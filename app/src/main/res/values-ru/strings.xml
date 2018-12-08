@@ -56,4 +56,10 @@
     <string name="question_number">Вопрос. %d/%d</string>
     <string name="next">Следующий</string>
     <string name="finish">Завершить</string>
+    <string name="test_started">Тест начался</string>
+    <string name="answer_submitted">Ответ принят</string>
+    <string name="error_submit_answer">Не удалось отправить ответ. Попробуйте еще раз!</string>
+    <string name="error_cant_start_test">Не удалось начать тест!</string>
+    <string name="test_finished">Тест завершен</string>
+    <string name="test_finished_message">Тест отправлен на проверку. Результат будет известен позже.</string>
 </resources>

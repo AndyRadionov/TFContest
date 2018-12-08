@@ -9,8 +9,8 @@ data class Problem(
     val id: Int,
     val position: Int,
     val problem: ProblemDetails,
-    val status: String,
-    @SerializedName("last_submission") val lastSubmission: LastSubmission
+    val status: String?,
+    @SerializedName("last_submission") val lastSubmission: LastSubmission?
 )
 
 data class ProblemDetails(
@@ -23,4 +23,4 @@ data class CmsPage(
     @SerializedName("unstyled_statement") val statement: String
 )
 
-data class LastSubmission(val file: String)
+data class LastSubmission(val file: String?)

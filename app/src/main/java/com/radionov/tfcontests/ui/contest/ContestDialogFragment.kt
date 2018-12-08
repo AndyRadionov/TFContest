@@ -2,25 +2,34 @@ package com.radionov.tfcontests.ui.contest
 
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.support.v4.app.DialogFragment
+import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.RadioButton
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.radionov.tfcontests.ContestApp
 import com.radionov.tfcontests.R
 import com.radionov.tfcontests.data.entities.Answer
+import com.radionov.tfcontests.data.entities.Contest
 import com.radionov.tfcontests.data.entities.Problem
 import com.radionov.tfcontests.utils.ANSWERED_QUESTION_STATUS
+import com.radionov.tfcontests.utils.EMPTY_STRING
 import com.radionov.tfcontests.utils.ProblemTypes
 import com.radionov.tfcontests.utils.stripHtml
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_dialog_contest.*
 import javax.inject.Inject
+
 
 private const val ARG_CONTEST_URL = "contest_url"
 
@@ -33,11 +42,16 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
     @ProvidePresenter
     fun providePresenter() = presenter
 
+    interface OnDismissListener {
+        fun onDismiss()
+    }
+
+    private var onDismissListener: OnDismissListener? = null
     private lateinit var contestUrl: String
     private lateinit var contestProblems: List<Problem>
-    private var selectedAnswers = ArrayList<String>()
-    private lateinit var contestTitle: String
     private lateinit var currentSelection: IntArray
+    private lateinit var timer: CountDownTimer
+    private var selectedAnswers = ArrayList<String>()
     private var currentQuestion = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,10 +69,10 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
         return object : Dialog(context, theme) {
             override fun onBackPressed() {
                 if (currentQuestion == 0) {
+                    timer.cancel()
                     dismiss()
                 } else {
                     currentQuestion--
@@ -68,10 +82,7 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dialog_contest, container, false)
     }
@@ -79,7 +90,6 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        presenter.getContest(contestUrl)
     }
 
     override fun onAttach(context: Context) {
@@ -93,11 +103,13 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
         }
     }
 
-    override fun showContest(title: String, problems: List<Problem>) {
-        tv_contest_title.text = title
-        contestTitle = title
+    override fun showContest(contest: Contest, problems: List<Problem>) {
+        presenter.startContest(contestUrl)
+        tv_contest_title.text = contest.title
         contestProblems = problems
-        showQuestion()
+        problems.forEach { selectedAnswers.add(it.lastSubmission?.file ?: EMPTY_STRING) }
+
+        initTimer(contest.timeLeft)
     }
 
     override fun showNotConnected() {
@@ -106,7 +118,42 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
         }
     }
 
+    override fun onAnswerSubmitted() {
+        if (currentQuestion != contestProblems.size - 1) {
+            showSuccess(R.string.answer_submitted)
+            showProgress(false)
+            currentQuestion++
+            showQuestion()
+        } else {
+            showFinishDialog()
+            timer.cancel()
+        }
+    }
+
+    override fun onTestStart() {
+        timer.start()
+        showSuccess(R.string.test_started)
+        showProgress(false)
+        showQuestion()
+    }
+
+    override fun onTestStartFail() {
+        showError(R.string.error_cant_start_test)
+        dismiss()
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+        onDismissListener?.onDismiss()
+        onDismissListener = null
+    }
+
+    fun setOnDismissListener(listener: OnDismissListener) {
+        onDismissListener = listener
+    }
+
     private fun showQuestion() {
+        setupButtons(currentQuestion != contestProblems.size - 1)
         tv_question_title.text = getString(R.string.question_number, currentQuestion + 1, contestProblems.size)
         val problem = contestProblems[currentQuestion]
         val answers = problem.problem.answerChoices
@@ -122,61 +169,55 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
     }
 
     private fun initSingleQuestion(problem: Problem, answers: List<String>) {
+        val selectedArr = parseSelectedArray(problem)
         for ((index, answer) in answers.withIndex()) {
             val radioButton = layoutInflater.inflate(R.layout.item_radio_button, radio_group, false) as RadioButton
             radioButton.id = index
             radioButton.text = answer
             radio_group.addView(radioButton)
         }
-        if (selectedAnswers.isNotEmpty() && problem.status == ANSWERED_QUESTION_STATUS) {
-            val selectedArr = selectedAnswers[currentQuestion].toCharArray()
-            val selectedAnswer = selectedArr.indexOf('1')
-            radio_group.check(selectedAnswer)
-        }
         radio_group.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId >= 0) {
                 currentSelection[checkedId] = 1
             }
         }
+        if (selectedArr.isNotEmpty()) {
+            val selectedAnswer = selectedArr.indexOf('1')
+            radio_group.check(selectedAnswer)
+        }
     }
 
     private fun initMultipleQuestion(problem: Problem, answers: List<String>) {
+        val selectedArr = parseSelectedArray(problem)
         for ((index, answer) in answers.withIndex()) {
             val checkBox = layoutInflater.inflate(R.layout.item_checkbox, checkbox_group, false) as CheckBox
             checkBox.text = answer
             checkBox.id = index
             checkbox_group.addView(checkBox)
 
-            if (selectedAnswers.isNotEmpty() && problem.status == ANSWERED_QUESTION_STATUS) {
-                val selectedArr = selectedAnswers[currentQuestion].toCharArray()
-                selectedArr.forEach {
-                    if (it == '1') checkBox.isChecked = true
-                }
-            }
             checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-                currentSelection[buttonView.id] = 1
+                currentSelection[buttonView.id] = if (isChecked) 1 else 0
+            }
+
+            if (selectedArr.isNotEmpty() && selectedArr[index] == '1') {
+                checkBox.isChecked = true
             }
         }
     }
 
     private fun init() {
+        presenter.getContest(contestUrl)
+
         iv_back.setOnClickListener {
             dialog.onBackPressed()
         }
 
         btn_next.setOnClickListener {
-            if (currentQuestion == contestProblems.size - 1) {
-                //submitAnswer()
-            } else {
-                currentQuestion++
-                showQuestion()
-            }
-
-            setupButtons(currentQuestion != contestProblems.size - 1)
+            submitAnswer()
         }
 
         btn_finish.setOnClickListener {
-            //submitAnswer()
+            submitAnswer()
         }
     }
 
@@ -185,6 +226,13 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
             View.VISIBLE to R.string.next else View.GONE to R.string.finish
         btn_finish.visibility = submitVisibility
         btn_next.text = getString(nextBtnText)
+    }
+
+    private fun showProgress(isShown: Boolean = true) {
+        val visibility = if (isShown) View.VISIBLE else View.INVISIBLE
+        test_progress.visibility = visibility
+        btn_next.isEnabled = !isShown
+        btn_finish.isEnabled = !isShown
     }
 
     private fun clearAnswers(answers: List<String>) {
@@ -196,13 +244,74 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
     }
 
     private fun submitAnswer() {
-        val questionId = contestProblems[currentQuestion].id
-        val answer = Answer(selectedAnswers.joinToString(""))
-        presenter.submitAnswer(contestUrl, questionId, answer)
+        showProgress()
+        val answerString = currentSelection.joinToString("")
+        selectedAnswers[currentQuestion] = answerString
+        val answer = Answer(answerString)
+        presenter.submitAnswer(contestUrl, currentQuestion + 1, answer)
+    }
+
+    private fun showSuccess(msgId: Int) {
+        context?.let {
+            Toasty.success(it, getString(msgId), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun parseSelectedArray(problem: Problem): CharArray {
+        return if (selectedAnswers[currentQuestion].isNotEmpty() && problem.status == ANSWERED_QUESTION_STATUS) {
+            selectedAnswers[currentQuestion].toCharArray()
+        } else {
+            CharArray(0)
+        }
+    }
+
+    private fun initTimer(seconds: Int) {
+        timer = object : CountDownTimer(seconds.toLong() * MILLISECONDS, MILLISECONDS) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                setTime(millisUntilFinished)
+            }
+
+            override fun onFinish() {
+                showFinishDialog()
+            }
+        }
+    }
+
+    private fun setTime(milliseconds: Long) {
+        var seconds = (milliseconds / MILLISECONDS).toInt()
+        val minutes = seconds / SECONDS
+        seconds %= SECONDS
+        tv_test_time.text = String.format(TIMER_FORMAT, minutes, seconds)
+    }
+
+    private fun showFinishDialog() {
+        context?.let {
+            val finishDialog = AlertDialog.Builder(it)
+                .setTitle(R.string.test_finished)
+                .setMessage(R.string.test_finished_message)
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.yes) { dialog, _ ->
+                    dialog.cancel()
+                    this@ContestFragmentDialog.dismiss()
+                }
+                .create()
+            finishDialog.setOnShowListener {
+                finishDialog
+                    .getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setTextColor(ResourcesCompat.getColor(resources, R.color.blue_question, null))
+            }
+            finishDialog.show()
+        }
+
     }
 
     companion object {
         val TAG: String = ContestFragmentDialog::class.java.simpleName
+        const val TIMER_FORMAT = "%d:%02d"
+        const val MILLISECONDS = 1000L
+        const val SECONDS = 60
+
         @JvmStatic
         fun newInstance(contestUrl: String) =
             ContestFragmentDialog().apply {

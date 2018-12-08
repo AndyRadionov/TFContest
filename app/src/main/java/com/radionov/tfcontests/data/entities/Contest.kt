@@ -1,11 +1,14 @@
 package com.radionov.tfcontests.data.entities
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * @author Andrey Radionov
  */
 data class Contest(
     val title: String,
-    val duration: Int
+    val duration: Int,
+    @SerializedName("time_left") val timeLeft: Int
 )
 
 data class ContestResponse(
