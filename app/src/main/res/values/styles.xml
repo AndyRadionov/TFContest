@@ -49,12 +49,21 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="CourseTextStyle">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="CommonTextStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="CourseTextStyle" parent="CommonTextStyle">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="ContestToolbarText" parent="CourseTextStyle">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="BoldCourseTextStyle" parent="CourseTextStyle">
@@ -92,7 +101,7 @@
         <item name="android:layout_marginTop">@dimen/regular_margin</item>
     </style>
 
-    <style name="ProfileButton">
+    <style name="ProfileButtonStyle">
         <item name="android:layout_width">@dimen/btn_width</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/double_margin</item>
@@ -105,4 +114,16 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="ContestButtonStyle" parent="ProfileButtonStyle">
+        <item name="android:layout_marginLeft">@dimen/regular_margin</item>
+        <item name="android:layout_marginRight">@dimen/regular_margin</item>
+        <item name="android:layout_marginBottom">@dimen/double_margin</item>
+    </style>
+
+    <style name="QuestionContainerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/double_margin</item>
+        <item name="android:orientation">vertical</item>
+    </style>
 </resources>

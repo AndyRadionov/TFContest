@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     tools:context=".ui.contest.ContestFragmentDialog"
     tools:ignore="ContentDescription,RtlHardcoded">
 
@@ -11,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#8d9eeb">
+        android:background="@color/blue_question">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,35 +26,25 @@
 
             <TextView
                 android:id="@+id/tv_contest_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                style="@style/ContestToolbarText"
+                android:layout_marginLeft="@dimen/double_margin"
                 android:layout_toRightOf="@id/iv_back"
-                android:fontFamily="sans-serif-medium"
                 android:maxLength="20"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="normal"
                 tools:text="Test" />
 
             <TextView
                 android:id="@+id/tv_test_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/ContestToolbarText"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="32dp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="normal"
+                android:layout_marginRight="@dimen/double_margin"
                 tools:text="4.30" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
     <ProgressBar
         android:id="@+id/test_progress"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/progress_size"
+        android:layout_height="@dimen/progress_size"
         android:layout_centerInParent="true" />
 
     <android.support.v4.widget.NestedScrollView
@@ -69,46 +58,37 @@
             android:gravity="center">
 
             <TextView
+                style="@style/CommonTextStyle"
                 android:id="@+id/tv_question_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#8d9eeb"
-                android:fontFamily="sans-serif"
-                android:padding="16dp"
-                android:textColor="#ffffff"
-                android:textSize="24sp"
+                android:background="@color/blue_question"
+                android:padding="@dimen/double_margin"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/question_text"
                 android:textStyle="bold"
                 tools:text="Вопрос. 1/5" />
 
             <TextView
+                style="@style/CommonTextStyle"
                 android:id="@+id/tv_question"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_below="@id/tv_question_title"
-                android:fontFamily="sans-serif"
-                android:paddingLeft="16dp"
-                android:paddingTop="16dp"
-                android:paddingRight="16dp"
-                android:textColor="#333333"
-                android:textSize="16sp"
-                android:textStyle="normal"
+                android:paddingLeft="@dimen/double_margin"
+                android:paddingTop="@dimen/double_margin"
+                android:paddingRight="@dimen/double_margin"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/regular_text"
                 tools:text="Как сделать что-нибудь?" />
 
             <RadioGroup
                 android:id="@+id/radio_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_question"
-                android:layout_marginLeft="16dp"
-                android:orientation="vertical" />
+                style="@style/QuestionContainerStyle"
+                android:layout_below="@id/tv_question" />
 
             <LinearLayout
                 android:id="@+id/checkbox_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_question"
-                android:layout_marginLeft="16dp"
-                android:orientation="vertical" />
+                style="@style/QuestionContainerStyle"
+                android:layout_below="@id/tv_question" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 
@@ -120,37 +100,18 @@
 
         <Button
             android:id="@+id/btn_finish"
+            style="@style/ContestButtonStyle"
             android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/cancel_btn_bg"
-            android:elevation="4dp"
-            android:enabled="false"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.03"
             android:text="@string/finish"
-            android:textColor="@color/text_color"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            android:textColor="@color/text_color" />
 
         <Button
             android:id="@+id/btn_next"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="16dp"
+            style="@style/ContestButtonStyle"
             android:layout_toRightOf="@id/btn_finish"
             android:background="@drawable/save_btn_bg"
-            android:elevation="4dp"
-            android:enabled="false"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.03"
             android:text="@string/next"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 </RelativeLayout>
