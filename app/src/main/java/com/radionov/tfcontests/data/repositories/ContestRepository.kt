@@ -16,8 +16,6 @@ class ContestRepository(private val fintechApi: FintechApi) {
 
     fun startContest(url: String) = fintechApi.startContest(url)
 
-    fun getQuestion(url: String, questionId: Int) = fintechApi.getQuestion(url, questionId)
-
-    fun answerQuestion(url: String, questionId: Int, answer: Answer) =
-        fintechApi.answerQuestion(url, questionId, answer)
+    fun submitAnswer(url: String, questionId: Int, answer: Answer) =
+        fintechApi.submitAnswer(url, questionId, answer)
 }

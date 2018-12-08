@@ -34,7 +34,7 @@
             style="@style/CardTaskStyle"
             android:layout_below="@id/tv_short_name"
             android:layout_alignParentLeft="true"
-            android:maxLength="20"
+            android:maxLength="30"
             tools:text="Тест тест тест" />
     </RelativeLayout>
 

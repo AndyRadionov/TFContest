@@ -2,10 +2,12 @@ package com.radionov.tfcontests.ui.contest
 
 import com.arellomobile.mvp.InjectViewState
 import com.radionov.tfcontests.R
+import com.radionov.tfcontests.data.entities.Answer
 import com.radionov.tfcontests.data.entities.ContestResponse
 import com.radionov.tfcontests.data.entities.Problem
 import com.radionov.tfcontests.interactors.ContestInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
+import com.radionov.tfcontests.utils.RxComposers
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject
@@ -34,15 +36,19 @@ class ContestPresenter @Inject constructor(
             }, { viewState.showError(R.string.error_load_test) })
     }
 
-    fun startContest() {
-
+    fun startContest(url: String) {
+        if (isNotConnected()) return
+        disposable = contestInteractor.startContest(url)
+            .compose(rxComposers.getCompletableComposer())
+            .subscribe()
+        //todo
     }
 
-    fun getQuestion() {
-
-    }
-
-    fun answerQuestion() {
-
+    fun submitAnswer(url: String, questionId: Int, answer: Answer) {
+        if (isNotConnected()) return
+        disposable = contestInteractor.submitAnswer(url, questionId, answer)
+            .compose(rxComposers.getSingleComposer())
+            .subscribe()
+        //todo
     }
 }

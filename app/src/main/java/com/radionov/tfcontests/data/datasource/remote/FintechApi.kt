@@ -28,11 +28,8 @@ interface FintechApi {
     @POST("contest/{url}/start_contest")
     fun startContest(@Path("url") url: String): Completable
 
-    @GET("contest/{url}/problem/{id}")
-    fun getQuestion(@Path("url") url: String, @Path("id") questionId: Int): Single<Problem>
-
     @POST("contest/{url}/problem/{id}")
-    fun answerQuestion(@Path("url") url: String, @Path("id") questionId: Int, @Body answer: Answer): Single<Problem>
+    fun submitAnswer(@Path("url") url: String, @Path("id") questionId: Int, @Body answer: Answer): Single<Problem>
 
     @GET("contest/{url}/status")
     fun checkTestStatus(@Path("url") url: String): Single<ContestResponse>

@@ -27,8 +27,6 @@ class ContestInteractor(private val contestRepository: ContestRepository) {
 
     fun startContest(url: String) = contestRepository.startContest(url)
 
-    fun getQuestion(url: String, questionId: Int) = contestRepository.getQuestion(url, questionId)
-
-    fun answerQuestion(url: String, questionId: Int, answer: Answer) =
-        contestRepository.answerQuestion(url, questionId, answer)
+    fun submitAnswer(url: String, questionId: Int, answer: Answer) =
+        contestRepository.submitAnswer(url, questionId, answer)
 }

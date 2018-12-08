@@ -54,4 +54,9 @@
     <string name="error_test_announce">Test has not opened yet</string>
     <string name="error_tests_not_found">No available tests found</string>
     <string name="error_load_test">Could not load test</string>
+
+    //Contest Screen
+    <string name="question_number">Question. %d/%d</string>
+    <string name="next">Следующий</string>
+    <string name="finish">Завершить</string>
 </resources>

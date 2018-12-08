@@ -51,4 +51,9 @@
     <string name="error_test_announce">Тест не начался</string>
     <string name="error_tests_not_found">Доступные тесты не найдены</string>
     <string name="error_load_test">Не удалось загрузить тест</string>
+
+    //Contest Screen
+    <string name="question_number">Вопрос. %d/%d</string>
+    <string name="next">Следующий</string>
+    <string name="finish">Завершить</string>
 </resources>

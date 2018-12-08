@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     tools:context=".ui.contest.ContestFragmentDialog"
     tools:ignore="ContentDescription,RtlHardcoded">
 
@@ -30,13 +30,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:maxLength="20"
                 android:layout_toRightOf="@id/iv_back"
                 android:fontFamily="sans-serif-medium"
-                tools:text="Test"
+                android:maxLength="20"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                tools:text="Test" />
 
             <TextView
                 android:id="@+id/tv_test_time"
@@ -45,164 +45,104 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="32dp"
                 android:fontFamily="sans-serif-medium"
-                tools:text="5"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                tools:text="4.30" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/tv_question_title"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#8d9eeb"
-        android:fontFamily="sans-serif"
-        android:padding="16dp"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:text="Вопрос. 1/5" />
+        android:layout_below="@id/toolbar">
 
-    <TextView
-        android:id="@+id/tv_question"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_question_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#8d9eeb"
+                android:fontFamily="sans-serif"
+                android:padding="16dp"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="Вопрос. 1/5" />
+
+            <TextView
+                android:id="@+id/tv_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_question_title"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                tools:text="Как сделать что-нибудь?" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_question"
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/checkbox_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_question"
+                android:layout_marginLeft="16dp" />
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:padding="16dp"
-        android:textColor="#333333"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:layout_constraintTop_toBottomOf="@id/tv_question_title"
-        tools:text="Как сделать что-нибудь?" />
+        android:layout_height="wrap_content">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/vertical_guide"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <TextView
-        android:layout_marginTop="32dp"
-        android:id="@+id/tv_question_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/vertical_guide"
-        app:layout_constraintTop_toBottomOf="@id/tv_question" />
-
-    <TextView
-        android:layout_marginTop="32dp"
-        android:id="@+id/tv_question_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/vertical_guide"
-        app:layout_constraintTop_toBottomOf="@id/tv_question_1" />
-
-    <TextView
-        android:layout_marginTop="32dp"
-        android:id="@+id/tv_question_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/vertical_guide"
-        app:layout_constraintTop_toBottomOf="@id/tv_question_2" />
-
-    <TextView
-        android:layout_marginTop="32dp"
-        android:id="@+id/tv_question_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/vertical_guide"
-        app:layout_constraintTop_toBottomOf="@id/tv_question_3" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="@id/tv_question_1"
-        app:layout_constraintBottom_toBottomOf="@id/tv_question_4">
-
-        <RadioButton
-            android:id="@+id/radio_red"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="Roboto-Regular"
-            android:textColor="#333333"
-            android:textSize="16sp" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/cancel_btn_bg"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.03"
+            android:text="@string/finish"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
-        <RadioButton
-            android:id="@+id/radio_blue"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:id="@+id/radio_green"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:id="@+id/radio_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </RadioGroup>
-
-    <CheckBox
-        android:id="@+id/check_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/check_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/check_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/check_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/cancel_btn_bg"
-        android:elevation="4dp"
-        android:enabled="false"
-        android:fontFamily="sans-serif-medium"
-        android:letterSpacing="0.03"
-        android:text="@string/cancel"
-        android:textColor="@color/text_color"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/save_btn_bg"
-        android:elevation="4dp"
-        android:enabled="false"
-        android:fontFamily="sans-serif-medium"
-        android:letterSpacing="0.03"
-        android:text="@string/save"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-
-</android.support.constraint.ConstraintLayout>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toRightOf="@id/btn_finish"
+            android:background="@drawable/save_btn_bg"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.03"
+            android:text="@string/next"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+</RelativeLayout>
