@@ -28,9 +28,13 @@
     <string name="login_hint">LOGIN</string>
     <string name="pass_hint">PASSWORD</string>
     <string name="profile_updated">Profile updated</string>
+    <string name="company">Company</string>
+    <string name="current_work">Current work</string>
+    <string name="mobile_phone">Mobile phone</string>
     <string name="error_update_profile">Can\'t update profile</string>
-    <string name="name_rus_error">Enter name in russian</string>
-    <string name="name_full_error">Enter first and last names</string>
+    <string name="error_name_rus">Enter name in russian</string>
+    <string name="error_name_full">Enter first and last names</string>
+    <string name="error_phone">Correct format +71234567890</string>
 
     //Settings Screen
     <string name="action_settings">Settings</string>

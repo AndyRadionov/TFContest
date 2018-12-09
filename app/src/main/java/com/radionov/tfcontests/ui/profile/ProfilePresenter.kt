@@ -50,11 +50,12 @@ class ProfilePresenter @Inject constructor(
             })
     }
 
-    fun isNameValid(name: String) {
+    fun isInputValid(name: String, phone: String) {
         when {
-            InputValidator.isNameNotRus(name) -> viewState.onNameInputFail(R.string.name_rus_error)
-            InputValidator.isNameNotFull(name) -> viewState.onNameInputFail(R.string.name_full_error)
-            else -> viewState.onNameInput()
+            InputValidator.isNameNotRus(name) -> viewState.onNameInputFail(R.string.error_name_rus)
+            InputValidator.isNameNotFull(name) -> viewState.onNameInputFail(R.string.error_name_full)
+            InputValidator.isPhoneNotValid(phone) -> viewState.onPhoneInputFail()
+            else -> viewState.onInputSuccess()
         }
     }
 }

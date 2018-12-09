@@ -27,10 +27,14 @@
     <string name="login_hint">ЛОГИН</string>
     <string name="pass_hint">ПАРОЛЬ</string>
     <string name="profile_updated">Профиль обновлен</string>
+    <string name="mobile_phone">Мобильный телефон</string>
+    <string name="current_work">Текущее место работы</string>
+    <string name="company">Компания</string>
     <string name="error_update_profile">Не удалось обновить профиль</string>
-    <string name="name_rus_error">Введите имя кирилицей</string>
-    <string name="name_full_error">Введите имя и фамилию</string>
-
+    <string name="error_name_rus">Введите имя кирилицей</string>
+    <string name="error_name_full">Введите имя и фамилию</string>
+    <string name="error_phone">Корректный формат +71234567890</string>
+    
     //Settings Screen
     <string name="action_settings">Настройки</string>
     <string name="logout">Выйти</string>

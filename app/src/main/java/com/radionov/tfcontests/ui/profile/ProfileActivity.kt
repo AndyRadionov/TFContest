@@ -80,6 +80,8 @@ class ProfileActivity : BaseActivity(), ProfileView {
         et_region.setText(user.region)
         et_university.setText(user.university)
         et_university_grade.setText(user.universityGraduation.toString())
+        et_work.setText(user.currentWork)
+        et_phone.setText(user.phone)
         changeButtonsState()
         Picasso.get()
             .load("${BuildConfig.TF_URL}${user.avatar}")
@@ -100,8 +102,9 @@ class ProfileActivity : BaseActivity(), ProfileView {
         Toasty.error(this, getString(R.string.error_update_profile), Toast.LENGTH_SHORT).show()
     }
 
-    override fun onNameInput() {
+    override fun onInputSuccess() {
         name_layout.error = EMPTY_STRING
+        phone_layout.error = EMPTY_STRING
         parseUserData()
         presenter.updateProfile(currentUser)
         changeButtonsState()
@@ -111,12 +114,17 @@ class ProfileActivity : BaseActivity(), ProfileView {
         name_layout.error = getString(errorStringId)
     }
 
+    override fun onPhoneInputFail() {
+        phone_layout.error = getString(R.string.error_phone)
+    }
+
     private fun init() {
         swipe_container.isRefreshing = true
         swipe_container.setOnRefreshListener { presenter.fetchUpdate() }
         btn_save.setOnClickListener {
             val name = et_name.text.toString()
-            presenter.isNameValid(name)
+            val phone = et_phone.text.toString()
+            presenter.isInputValid(name, phone)
         }
         btn_cancel.setOnClickListener {
             presenter.getProfile()
@@ -127,6 +135,8 @@ class ProfileActivity : BaseActivity(), ProfileView {
         et_region.addTextChangedListener(textWatcher)
         et_university.addTextChangedListener(textWatcher)
         et_university_grade.addTextChangedListener(textWatcher)
+        et_work.addTextChangedListener(textWatcher)
+        et_phone.addTextChangedListener(textWatcher)
     }
 
     private fun changeButtonsState(isEnabled: Boolean = false) {
@@ -142,6 +152,8 @@ class ProfileActivity : BaseActivity(), ProfileView {
             region = et_region.text.toString()
             university = et_university.text.toString()
             universityGraduation = et_university_grade.text.toString().toInt()
+            currentWork = et_work.text.toString()
+            phone = et_phone.text.toString()
         }
     }
 
@@ -191,15 +203,12 @@ class ProfileActivity : BaseActivity(), ProfileView {
 
     private fun initTextWatcher(): TextWatcher {
         return object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 changeButtonsState(true)
             }
 
-            override fun afterTextChanged(s: Editable?) {
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {/*NOP*/}
+            override fun afterTextChanged(s: Editable?) {/*NOP*/}
         }
     }
 

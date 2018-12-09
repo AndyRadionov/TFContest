@@ -16,6 +16,7 @@ interface ProfileView: BaseView {
     fun showProfile(user: User)
     fun showSuccess()
     fun showError()
-    fun onNameInput()
+    fun onInputSuccess()
     fun onNameInputFail(errorStringId: Int)
+    fun onPhoneInputFail()
 }
