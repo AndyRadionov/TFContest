@@ -104,7 +104,6 @@
     <style name="ProfileButtonStyle">
         <item name="android:layout_width">@dimen/btn_width</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">@dimen/double_margin</item>
         <item name="android:layout_marginBottom">@dimen/regular_margin</item>
         <item name="android:elevation">@dimen/regular_elevation</item>
         <item name="android:enabled">false</item>
@@ -125,5 +124,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/double_margin</item>
         <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AnswerStyle" parent="CourseTextStyle">
+        <item name="android:layout_marginTop">@dimen/double_margin</item>
+        <item name="android:paddingLeft">@dimen/question_margin</item>
+        <item name="android:textSize">@dimen/regular_text</item>
     </style>
 </resources>

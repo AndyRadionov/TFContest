@@ -157,6 +157,7 @@
             <Button
                 android:id="@+id/btn_cancel"
                 style="@style/ProfileButtonStyle"
+                android:layout_marginLeft="@dimen/double_margin"
                 android:background="@drawable/cancel_btn_bg"
                 android:text="@string/cancel"
                 android:textColor="@color/text_color"
@@ -167,6 +168,7 @@
             <Button
                 android:id="@+id/btn_save"
                 style="@style/ProfileButtonStyle"
+                android:layout_marginRight="@dimen/double_margin"
                 android:background="@drawable/save_btn_bg"
                 android:text="@string/save"
                 android:textColor="@android:color/white"

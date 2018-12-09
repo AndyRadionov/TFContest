@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue_question">
+        android:background="@color/colorPrimary">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 style="@style/CommonTextStyle"
                 android:id="@+id/tv_question_title"
                 android:layout_width="match_parent"
-                android:background="@color/blue_question"
+                android:background="@color/colorPrimary"
                 android:padding="@dimen/double_margin"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/question_text"

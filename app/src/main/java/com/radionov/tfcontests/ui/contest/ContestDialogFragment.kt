@@ -27,6 +27,7 @@ import com.radionov.tfcontests.utils.EMPTY_STRING
 import com.radionov.tfcontests.utils.ProblemTypes
 import com.radionov.tfcontests.utils.stripHtml
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.dialog_test_completed.*
 import kotlinx.android.synthetic.main.fragment_dialog_contest.*
 import javax.inject.Inject
 
@@ -120,7 +121,6 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
 
     override fun onAnswerSubmitted() {
         if (currentQuestion != contestProblems.size - 1) {
-            showSuccess(R.string.answer_submitted)
             showProgress(false)
             currentQuestion++
             showQuestion()
@@ -286,24 +286,8 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
     }
 
     private fun showFinishDialog() {
-        context?.let {
-            val finishDialog = AlertDialog.Builder(it)
-                .setTitle(R.string.test_finished)
-                .setMessage(R.string.test_finished_message)
-                .setCancelable(false)
-                .setPositiveButton(android.R.string.yes) { dialog, _ ->
-                    dialog.cancel()
-                    this@ContestFragmentDialog.dismiss()
-                }
-                .create()
-            finishDialog.setOnShowListener {
-                finishDialog
-                    .getButton(AlertDialog.BUTTON_POSITIVE)
-                    .setTextColor(ResourcesCompat.getColor(resources, R.color.blue_question, null))
-            }
-            finishDialog.show()
-        }
-
+        dialog.setContentView(R.layout.dialog_test_completed)
+        dialog.btn_done.setOnClickListener { dismiss() }
     }
 
     companion object {

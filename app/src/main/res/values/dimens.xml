@@ -7,7 +7,6 @@
     <dimen name="avatar_border">0.5dp</dimen>
     <dimen name="avatar_size">100dp</dimen>
     <dimen name="avatar_radius">50dp</dimen>
-    <dimen name="double_margin">16dp</dimen>
     <dimen name="year_btn_size">40dp</dimen>
     <dimen name="chart_size">160dp</dimen>
     <dimen name="ongoing_badge_size">20dp</dimen>
@@ -32,6 +31,8 @@
     <dimen name="tests_badge_padding">4dp</dimen>
     <dimen name="regular_elevation">4dp</dimen>
     <dimen name="regular_margin">8dp</dimen>
+    <dimen name="double_margin">16dp</dimen>
     <dimen name="profile_left_margin">24dp</dimen>
     <dimen name="login_big_margin">48dp</dimen>
+    <dimen name="question_margin">32dp</dimen>
 </resources>

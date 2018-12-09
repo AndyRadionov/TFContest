@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/smile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/congratulations"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/smiling" />
+
+    <TextView
+        android:id="@+id/congratulations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/double_margin"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal"
+        android:text="@string/congratulations"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/toolbar_text"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/congratulations"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/double_margin"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:text="@string/test_finished_message"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/label_text"
+        android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="@dimen/login_input_width"
+        android:layout_height="@dimen/login_input_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/regular_margin"
+        android:layout_marginBottom="@dimen/question_margin"
+        android:background="@drawable/login_btn_bg"
+        android:text="@string/done_btn"
+        android:textColor="@color/text_color" />
+</RelativeLayout>
