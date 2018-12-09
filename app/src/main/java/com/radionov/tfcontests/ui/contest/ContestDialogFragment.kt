@@ -130,7 +130,6 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
 
     override fun onTestStart() {
         timer.start()
-        showSuccess(R.string.test_started)
         showProgress(false)
         showQuestion()
     }
@@ -247,12 +246,6 @@ class ContestFragmentDialog : MvpAppCompatDialogFragment(), ContestView {
         selectedAnswers[currentQuestion] = answerString
         val answer = Answer(answerString)
         presenter.submitAnswer(contestUrl, currentQuestion + 1, answer)
-    }
-
-    private fun showSuccess(msgId: Int) {
-        context?.let {
-            Toasty.success(it, getString(msgId), Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun parseSelectedArray(problem: Problem): CharArray {
