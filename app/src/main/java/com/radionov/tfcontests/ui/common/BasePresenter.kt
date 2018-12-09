@@ -15,7 +15,7 @@ abstract class BasePresenter<T : BaseView> : MvpPresenter<T>() {
     @Inject lateinit var networkManager: NetworkManager
     protected var disposable: Disposable? = null
 
-    protected fun dispose() {
+    private fun dispose() {
         disposable?.dispose()
     }
 

@@ -1,7 +1,6 @@
 package com.radionov.tfcontests.utils
 
 import android.text.Html
-import android.widget.TextView
 
 /**
  * @author Andrey Radionov

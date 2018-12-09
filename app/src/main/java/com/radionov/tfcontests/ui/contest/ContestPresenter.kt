@@ -8,9 +8,7 @@ import com.radionov.tfcontests.data.entities.Problem
 import com.radionov.tfcontests.interactors.ContestInteractor
 import com.radionov.tfcontests.ui.common.BasePresenter
 import io.reactivex.Single
-import io.reactivex.functions.Action
 import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 /**

@@ -7,7 +7,6 @@ const val ANSWERED_QUESTION_STATUS = "AC"
 const val TEST_LECTURE_TYPE = "test_during_lecture"
 const val EMPTY_STRING = ""
 
-//todo remove title?
 enum class TaskStatuses(val title: String) {
     NEW("new"),
     ANNOUNCEMENT("announcement"),
