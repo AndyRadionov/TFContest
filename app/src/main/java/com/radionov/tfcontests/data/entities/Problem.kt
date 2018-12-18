@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName
  * @author Andrey Radionov
  */
 data class Problem(
-    val id: Int,
-    val position: Int,
-    val problem: ProblemDetails,
-    val status: String?,
+    @SerializedName("id") val id: Int,
+    @SerializedName("position") val position: Int,
+    @SerializedName("problem") val problem: ProblemDetails,
+    @SerializedName("status") val status: String?,
     @SerializedName("last_submission") val lastSubmission: LastSubmission?
 )
 
@@ -23,4 +23,6 @@ data class CmsPage(
     @SerializedName("unstyled_statement") val statement: String
 )
 
-data class LastSubmission(val file: String?)
+data class LastSubmission(
+    @SerializedName("file") val file: String?
+)

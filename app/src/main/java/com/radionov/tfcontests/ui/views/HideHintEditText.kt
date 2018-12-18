@@ -8,21 +8,13 @@ import android.util.AttributeSet
 /**
  * @author Andrey Radionov
  */
-class HideHintEditText : AppCompatEditText {
+class HideHintEditText @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : AppCompatEditText(context, attrs, defStyleAttr) {
 
-    private val initialHint: CharSequence
-
-    constructor(context: Context) : super(context) {
-        initialHint = this.hint
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        initialHint = this.hint
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        initialHint = this.hint
-    }
+    private val initialHint: CharSequence = this.hint
 
     override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect)

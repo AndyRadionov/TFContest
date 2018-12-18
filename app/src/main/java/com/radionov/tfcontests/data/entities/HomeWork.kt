@@ -6,23 +6,25 @@ import com.google.gson.annotations.SerializedName
  * @author Andrey Radionov
  */
 data class HomeWork(
-    val id: Int,
-    val title: String,
-    val tasks: List<Task>
+    @SerializedName("id") val id: Int,
+    @SerializedName("title") val title: String,
+    @SerializedName("tasks") val tasks: List<Task>
 )
 
-data class HomeWorksResponse(val homeworks: List<HomeWork>)
+data class HomeWorksResponse(
+    @SerializedName("homeworks") val homeworks: List<HomeWork>
+)
 
 data class Task(
-    val id: Int,
-    val task: TaskDetails,
-    val status: String,
-    val mark: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("task") val task: TaskDetails,
+    @SerializedName("status") val status: String,
+    @SerializedName("mark") val mark: String
 )
 
 data class TaskDetails(
-    val id: Int,
-    val title: String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("title") val title: String,
     @SerializedName("task_type") val taskType: String,
     @SerializedName("contest_info") val contestInfo: ContestInfo,
     @SerializedName("short_name") val shortName: String
@@ -33,4 +35,6 @@ data class ContestInfo(
     @SerializedName("contest_url") val contestUrl: String
 )
 
-data class ContestStatus(val status: String)
+data class ContestStatus(
+    @SerializedName("status") val status: String
+)

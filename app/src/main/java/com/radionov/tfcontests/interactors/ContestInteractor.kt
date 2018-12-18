@@ -16,8 +16,8 @@ class ContestInteractor(private val contestRepository: ContestRepository) {
     fun getHomeWorks(): Single<MutableList<Task>> =
         contestRepository.getHomeWorks()
             .map { response: HomeWorksResponse -> response.homeworks }
-            .flatMap { homeWorks -> Observable.fromIterable(homeWorks) }
-            .flatMap { homeWork -> Observable.fromIterable(homeWork.tasks) }
+            .flatMapIterable { it }
+            .flatMapIterable { it.tasks }
             .filter { task -> task.task.taskType == TEST_LECTURE_TYPE }
             .toList()
 

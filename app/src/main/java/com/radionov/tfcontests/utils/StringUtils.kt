@@ -1,16 +1,11 @@
 package com.radionov.tfcontests.utils
 
-import android.text.Html
+import android.support.v4.text.HtmlCompat
 
 /**
  * @author Andrey Radionov
  */
 fun stripHtml(html: String): String {
-    val text =  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-        Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        Html.fromHtml(html)
-    }
-
+    val text = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT)
     return text.toString().replace("\n", "").trim()
 }

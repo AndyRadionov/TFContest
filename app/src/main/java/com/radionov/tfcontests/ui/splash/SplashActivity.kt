@@ -18,7 +18,7 @@ class SplashActivity : BaseActivity(), SplashView {
     @Inject
     @InjectPresenter
     lateinit var presenter: SplashPresenter
-    private var timeoutHandler: Handler? = null
+    private val timeoutHandler by lazy { Handler() }
 
     @ProvidePresenter
     fun providePresenter() = presenter
@@ -40,13 +40,10 @@ class SplashActivity : BaseActivity(), SplashView {
     }
 
     private fun openScreen(screen: Class<out Activity>) {
-        if (timeoutHandler == null) {
-            timeoutHandler = Handler()
-            timeoutHandler?.postDelayed({
-                val intent = Intent(this, screen)
-                startActivity(intent)
-            }, SPLASH_TIME_OUT)
-        }
+        timeoutHandler.postDelayed({
+            val intent = Intent(this, screen)
+            startActivity(intent)
+        }, SPLASH_TIME_OUT)
     }
 
     companion object {
